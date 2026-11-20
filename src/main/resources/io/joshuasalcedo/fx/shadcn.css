@@ -1,0 +1,807 @@
+/*
+ * The shadcn/ui look for JavaFX. Every color comes from the tokens in tokens.css (-background, -primary,
+ * -border, -ring-50...), so changing the tokens restyles everything. Sizes follow shadcn's classes
+ * (h-9 = 36px, px-4 = 16px, rounded-md = radius * 0.8). Plain JavaFX controls get the look too; the
+ * io.joshuasalcedo.fx.ui components add shadcn's variants (mfx-default, mfx-outline, mfx-sm...).
+ *
+ * Focus rings: controls draw two borders, an outer 3px ring (transparent until focused) and the 1px border,
+ * so hover can change the background without touching the ring.
+ */
+
+/* ------------------------------------------------------------ base, and AtlantaFX following the tokens */
+
+.root {
+    -fx-font-size: 14px;
+    -fx-background-color: -background;
+
+    -color-bg-default: -background;
+    -color-bg-overlay: -popover;
+    -color-bg-subtle: -muted;
+    -color-bg-inset: -muted;
+    -color-fg-default: -foreground;
+    -color-fg-muted: -muted-foreground;
+    -color-fg-subtle: -muted-foreground;
+    -color-fg-emphasis: -primary-foreground;
+    -color-border-default: -border;
+    -color-border-muted: -border;
+    -color-border-subtle: -border;
+    -color-accent-fg: -primary;
+    -color-accent-emphasis: -primary;
+    -color-accent-muted: -ring-50;
+    -color-accent-subtle: -accent;
+    -color-neutral-emphasis: -muted-foreground;
+    -color-neutral-muted: -muted;
+    -color-neutral-subtle: -accent;
+    -color-danger-fg: -destructive;
+    -color-danger-emphasis: -destructive;
+    -color-danger-muted: -destructive-20;
+    -color-danger-subtle: -destructive-10;
+    -color-separator: -border;
+    -color-shadow-default: rgba(0, 0, 0, 0.1);
+    -color-cell-bg: -background;
+    -color-cell-bg-odd: -background;
+    -color-cell-fg: -foreground;
+    -color-cell-bg-selected: -accent;
+    -color-cell-fg-selected: -accent-foreground;
+    -color-cell-bg-selected-focused: -accent;
+    -color-cell-fg-selected-focused: -accent-foreground;
+    -color-cell-border: -border;
+    -color-header-bg: -background;
+    -color-header-fg: -muted-foreground;
+    -color-slider-track: -muted;
+    -color-slider-track-progress: -primary;
+    -color-slider-thumb: -background;
+    -color-slider-thumb-border: -primary;
+    -color-progress-bar-track: -primary-20;
+    -color-progress-bar-fill: -primary;
+    -color-progress-indicator-track: -primary-20;
+    -color-progress-indicator-fill: -primary;
+    -color-chart-1: -chart-1;
+    -color-chart-2: -chart-2;
+    -color-chart-3: -chart-3;
+    -color-chart-4: -chart-4;
+    -color-chart-5: -chart-5;
+}
+
+.label {
+    -fx-text-fill: -foreground;
+}
+
+.text {
+    -fx-fill: -foreground;
+}
+
+/* ------------------------------------------------------------ Button (plain JavaFX buttons look like "outline") */
+
+.button {
+    -fx-background-color: -background;
+    -fx-background-insets: 0;
+    -fx-background-radius: 8;
+    -fx-border-color: transparent, -input;
+    -fx-border-width: 3, 1;
+    -fx-border-insets: -3, 0;
+    -fx-border-radius: 11, 8;
+    -fx-padding: 0 16;
+    -fx-min-height: 36;
+    -fx-pref-height: 36;
+    -fx-text-fill: -foreground;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-graphic-text-gap: 8;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 1);
+}
+
+.button:hover {
+    -fx-background-color: -accent;
+    -fx-text-fill: -accent-foreground;
+}
+
+.dark .button {
+    -fx-background-color: -input-30;
+}
+
+.dark .button:hover {
+    -fx-background-color: -input-50;
+}
+
+.button .ikonli-font-icon {
+    -fx-icon-color: -foreground;
+    -fx-icon-size: 16;
+}
+
+.button:hover .ikonli-font-icon {
+    -fx-icon-color: -accent-foreground;
+}
+
+/* JavaFX's default button (setDefaultButton) is shadcn's default variant. */
+.button:default,
+.button.mfx-default {
+    -fx-background-color: -primary;
+    -fx-border-color: transparent, transparent;
+    -fx-text-fill: -primary-foreground;
+}
+
+.button:default:hover,
+.button.mfx-default:hover {
+    -fx-background-color: -primary-90;
+    -fx-text-fill: -primary-foreground;
+}
+
+.button:default .ikonli-font-icon,
+.button.mfx-default .ikonli-font-icon {
+    -fx-icon-color: -primary-foreground;
+}
+
+.button.mfx-destructive {
+    -fx-background-color: -destructive;
+    -fx-border-color: transparent, transparent;
+    -fx-text-fill: #ffffff;
+}
+
+.button.mfx-destructive:hover {
+    -fx-background-color: -destructive-90;
+    -fx-text-fill: #ffffff;
+}
+
+.dark .button.mfx-destructive {
+    -fx-background-color: -destructive-60;
+}
+
+.button.mfx-destructive .ikonli-font-icon {
+    -fx-icon-color: #ffffff;
+}
+
+.button.mfx-secondary {
+    -fx-background-color: -secondary;
+    -fx-border-color: transparent, transparent;
+    -fx-text-fill: -secondary-foreground;
+}
+
+.button.mfx-secondary:hover {
+    -fx-background-color: -secondary-80;
+    -fx-text-fill: -secondary-foreground;
+}
+
+.button.mfx-secondary .ikonli-font-icon {
+    -fx-icon-color: -secondary-foreground;
+}
+
+.button.mfx-ghost {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent, transparent;
+    -fx-effect: null;
+}
+
+.button.mfx-ghost:hover {
+    -fx-background-color: -accent;
+}
+
+.dark .button.mfx-ghost:hover {
+    -fx-background-color: -accent-50;
+}
+
+.button.mfx-link {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent, transparent;
+    -fx-text-fill: -primary;
+    -fx-effect: null;
+}
+
+.button.mfx-link:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: -primary;
+    -fx-underline: true;
+}
+
+.button.mfx-link .ikonli-font-icon {
+    -fx-icon-color: -primary;
+}
+
+.button:focus-visible {
+    -fx-border-color: -ring-50, -ring;
+}
+
+.button.mfx-destructive:focus-visible {
+    -fx-border-color: -destructive-20, -destructive;
+}
+
+.dark .button.mfx-destructive:focus-visible {
+    -fx-border-color: -destructive-40, -destructive;
+}
+
+.button:disabled {
+    -fx-opacity: 0.5;
+}
+
+/* Sizes: default h-9 px-4; with an icon px-3 */
+.button.mfx-has-icon {
+    -fx-padding: 0 12;
+}
+
+.button.mfx-xs {
+    -fx-min-height: 24;
+    -fx-pref-height: 24;
+    -fx-padding: 0 8;
+    -fx-font-size: 12px;
+    -fx-graphic-text-gap: 4;
+    -fx-background-radius: 6;
+    -fx-border-radius: 9, 6;
+}
+
+.button.mfx-xs .ikonli-font-icon {
+    -fx-icon-size: 12;
+}
+
+.button.mfx-sm {
+    -fx-min-height: 32;
+    -fx-pref-height: 32;
+    -fx-padding: 0 12;
+    -fx-graphic-text-gap: 6;
+}
+
+.button.mfx-sm.mfx-has-icon {
+    -fx-padding: 0 10;
+}
+
+.button.mfx-lg {
+    -fx-min-height: 40;
+    -fx-pref-height: 40;
+    -fx-padding: 0 24;
+}
+
+.button.mfx-lg.mfx-has-icon {
+    -fx-padding: 0 16;
+}
+
+.button.mfx-icon,
+.button.mfx-icon-xs,
+.button.mfx-icon-sm,
+.button.mfx-icon-lg {
+    -fx-padding: 0;
+    -fx-content-display: graphic-only;
+}
+
+.button.mfx-icon {
+    -fx-min-width: 36;
+    -fx-pref-width: 36;
+    -fx-max-width: 36;
+}
+
+.button.mfx-icon-xs {
+    -fx-min-width: 24;
+    -fx-pref-width: 24;
+    -fx-max-width: 24;
+    -fx-min-height: 24;
+    -fx-pref-height: 24;
+    -fx-background-radius: 6;
+    -fx-border-radius: 9, 6;
+}
+
+.button.mfx-icon-sm {
+    -fx-min-width: 32;
+    -fx-pref-width: 32;
+    -fx-max-width: 32;
+    -fx-min-height: 32;
+    -fx-pref-height: 32;
+}
+
+.button.mfx-icon-lg {
+    -fx-min-width: 40;
+    -fx-pref-width: 40;
+    -fx-max-width: 40;
+    -fx-min-height: 40;
+    -fx-pref-height: 40;
+}
+
+/* ------------------------------------------------------------ Input, Textarea, Select */
+
+.text-field,
+.text-area,
+.combo-box-base,
+.choice-box {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 8;
+    -fx-border-color: transparent, -input;
+    -fx-border-width: 3, 1;
+    -fx-border-insets: -3, 0;
+    -fx-border-radius: 11, 8;
+    -fx-text-fill: -foreground;
+    -fx-prompt-text-fill: -muted-foreground;
+    -fx-highlight-fill: -primary;
+    -fx-highlight-text-fill: -primary-foreground;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 1);
+}
+
+.text-field {
+    -fx-padding: 4 12;
+    -fx-min-height: 36;
+    -fx-pref-height: 36;
+}
+
+.dark .text-field,
+.dark .text-area,
+.dark .combo-box-base,
+.dark .choice-box {
+    -fx-background-color: -input-30;
+}
+
+.text-field:focused,
+.text-area:focused,
+.combo-box-base:focused,
+.choice-box:focused {
+    -fx-border-color: -ring-50, -ring;
+}
+
+.text-field:invalid,
+.text-area:invalid {
+    -fx-border-color: transparent, -destructive;
+}
+
+.text-field:invalid:focused,
+.text-area:invalid:focused {
+    -fx-border-color: -destructive-20, -destructive;
+}
+
+.text-field:disabled,
+.text-area:disabled,
+.combo-box-base:disabled,
+.choice-box:disabled {
+    -fx-opacity: 0.5;
+}
+
+.text-area {
+    -fx-padding: 0;
+    -fx-min-height: 64;
+}
+
+.text-area > .scroll-pane,
+.text-area > .scroll-pane > .viewport,
+.text-area > .scroll-pane > .corner {
+    -fx-background-color: transparent;
+}
+
+.text-area > .scroll-pane > .viewport > .content {
+    -fx-background-color: transparent;
+    -fx-padding: 8 12;
+}
+
+.combo-box-base,
+.choice-box {
+    -fx-padding: 0;
+    -fx-min-height: 36;
+    -fx-pref-height: 36;
+}
+
+.combo-box-base:hover,
+.choice-box:hover {
+    -fx-background-color: transparent;
+}
+
+.dark .combo-box-base:hover,
+.dark .choice-box:hover {
+    -fx-background-color: -input-50;
+}
+
+.combo-box > .list-cell,
+.choice-box > .label {
+    -fx-background-color: transparent;
+    -fx-text-fill: -foreground;
+    -fx-padding: 0 0 0 12;
+}
+
+.combo-box-base > .arrow-button,
+.choice-box > .open-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 12 0 8;
+}
+
+.combo-box-base > .arrow-button > .arrow,
+.choice-box > .open-button > .arrow {
+    -fx-background-color: -muted-foreground;
+    -fx-shape: "M6 9l6 6 6-6";
+    -fx-padding: 3 5;
+    -fx-opacity: 0.5;
+}
+
+/* ------------------------------------------------------------ Popups: select lists, menus, tooltips */
+
+.combo-box-popup > .list-view,
+.context-menu,
+.menu-bar .context-menu,
+.choice-box .context-menu {
+    -fx-background-color: -popover;
+    -fx-background-insets: 0;
+    -fx-background-radius: 8;
+    -fx-border-color: -border;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-padding: 4;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 9, 0, 0, 4);
+}
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
+    -fx-background-color: transparent;
+    -fx-background-radius: 6;
+    -fx-padding: 6 8;
+    -fx-text-fill: -popover-foreground;
+}
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover,
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:selected {
+    -fx-background-color: -accent;
+    -fx-text-fill: -accent-foreground;
+}
+
+.menu-item {
+    -fx-background-radius: 6;
+    -fx-padding: 6 8;
+}
+
+.menu-item > .label {
+    -fx-text-fill: -popover-foreground;
+}
+
+.menu-item:focused,
+.menu-item:hover {
+    -fx-background-color: -accent;
+}
+
+.menu-item:focused > .label,
+.menu-item:hover > .label {
+    -fx-text-fill: -accent-foreground;
+}
+
+.tooltip {
+    -fx-background-color: -primary;
+    -fx-background-radius: 6;
+    -fx-background-insets: 0;
+    -fx-text-fill: -primary-foreground;
+    -fx-padding: 6 12;
+    -fx-font-size: 12px;
+    -fx-effect: null;
+}
+
+/* ------------------------------------------------------------ Checkbox, Radio, Switch, Progress */
+
+.check-box {
+    -fx-text-fill: -foreground;
+    -fx-label-padding: 0 0 0 8;
+}
+
+.check-box > .box {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
+    -fx-border-color: transparent, -input;
+    -fx-border-width: 3, 1;
+    -fx-border-insets: -3, 0;
+    -fx-border-radius: 7, 4;
+    -fx-padding: 3;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 1);
+}
+
+.dark .check-box > .box {
+    -fx-background-color: -input-30;
+}
+
+.check-box > .box > .mark {
+    -fx-background-color: transparent;
+    -fx-min-width: 10;
+    -fx-max-width: 10;
+    -fx-min-height: 10;
+    -fx-max-height: 10;
+}
+
+.check-box:selected > .box,
+.check-box:indeterminate > .box {
+    -fx-background-color: -primary;
+    -fx-border-color: transparent, -primary;
+}
+
+.check-box:selected > .box > .mark,
+.check-box:indeterminate > .box > .mark {
+    -fx-background-color: -primary-foreground;
+}
+
+.check-box:focus-visible > .box {
+    -fx-border-color: -ring-50, -ring;
+}
+
+.check-box:disabled {
+    -fx-opacity: 0.5;
+}
+
+.radio-button {
+    -fx-text-fill: -foreground;
+    -fx-label-padding: 0 0 0 8;
+}
+
+.radio-button > .radio {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 9999;
+    -fx-border-color: transparent, -input;
+    -fx-border-width: 3, 1;
+    -fx-border-insets: -3, 0;
+    -fx-border-radius: 9999, 9999;
+    -fx-padding: 3;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 1);
+}
+
+.dark .radio-button > .radio {
+    -fx-background-color: -input-30;
+}
+
+.radio-button > .radio > .dot {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 9999;
+    -fx-padding: 4;
+    -fx-min-width: 8;
+    -fx-min-height: 8;
+}
+
+.radio-button:selected > .radio {
+    -fx-background-color: transparent;
+}
+
+.radio-button:selected > .radio > .dot {
+    -fx-background-color: -primary;
+}
+
+.radio-button:focus-visible > .radio {
+    -fx-border-color: -ring-50, -ring;
+}
+
+.radio-button:disabled {
+    -fx-opacity: 0.5;
+}
+
+/* AtlantaFX's ToggleSwitch as shadcn's Switch: a 32 x 18 track and a 16px thumb. */
+.toggle-switch > .thumb-area {
+    -fx-background-color: -input;
+    -fx-background-insets: 0;
+    -fx-background-radius: 9999;
+    -fx-padding: 9 16;
+}
+
+.dark .toggle-switch > .thumb-area {
+    -fx-background-color: -input-80;
+}
+
+.toggle-switch > .thumb {
+    -fx-background-color: -background;
+    -fx-background-insets: 1;
+    -fx-background-radius: 9999;
+    -fx-padding: 9;
+    -fx-opacity: 1;
+}
+
+.dark .toggle-switch > .thumb {
+    -fx-background-color: -foreground;
+}
+
+.toggle-switch:selected > .thumb-area {
+    -fx-background-color: -primary;
+}
+
+.toggle-switch:selected > .thumb,
+.dark .toggle-switch:selected > .thumb {
+    -fx-background-color: -primary-foreground;
+}
+
+.toggle-switch > .label-container > .label {
+    -fx-text-fill: -foreground;
+    -fx-padding: 0 8 0 0;
+}
+
+.toggle-switch:right > .label-container > .label {
+    -fx-padding: 0 0 0 8;
+}
+
+.toggle-switch:disabled {
+    -fx-opacity: 0.5;
+}
+
+.progress-bar {
+    -fx-padding: 0;
+    -fx-indeterminate-bar-length: 60;
+}
+
+.progress-bar > .track {
+    -fx-background-color: -primary-20;
+    -fx-background-insets: 0;
+    -fx-background-radius: 9999;
+}
+
+.progress-bar > .bar {
+    -fx-background-color: -primary;
+    -fx-background-insets: 0;
+    -fx-background-radius: 9999;
+    -fx-padding: 4;
+}
+
+/* ------------------------------------------------------------ Components (io.joshuasalcedo.fx.ui) */
+
+.mfx-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-text-fill: -foreground;
+}
+
+.mfx-label:disabled {
+    -fx-opacity: 0.5;
+}
+
+.mfx-muted {
+    -fx-text-fill: -muted-foreground;
+}
+
+.mfx-card {
+    -fx-background-color: -card;
+    -fx-background-radius: 14;
+    -fx-border-color: -border;
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+    -fx-padding: 24 0;
+    -fx-spacing: 24;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 4, 0, 0, 1);
+}
+
+.mfx-card-header {
+    -fx-padding: 0 24;
+    -fx-hgap: 8;
+    -fx-vgap: 6;
+}
+
+.mfx-card-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+    -fx-text-fill: -card-foreground;
+}
+
+.mfx-card-description {
+    -fx-text-fill: -muted-foreground;
+    -fx-wrap-text: true;
+}
+
+.mfx-card-content {
+    -fx-padding: 0 24;
+    -fx-spacing: 8;
+}
+
+.mfx-card-footer {
+    -fx-padding: 0 24;
+    -fx-spacing: 8;
+    -fx-alignment: center-left;
+}
+
+.mfx-card .label {
+    -fx-text-fill: -card-foreground;
+}
+
+.mfx-card .mfx-card-description,
+.mfx-card .mfx-muted {
+    -fx-text-fill: -muted-foreground;
+}
+
+.mfx-badge {
+    -fx-background-color: -primary;
+    -fx-background-radius: 8;
+    -fx-border-color: transparent;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-padding: 2 8;
+    -fx-font-size: 12px;
+    -fx-font-weight: 500;
+    -fx-text-fill: -primary-foreground;
+    -fx-graphic-text-gap: 4;
+}
+
+.mfx-badge .ikonli-font-icon {
+    -fx-icon-size: 12;
+    -fx-icon-color: -primary-foreground;
+}
+
+.mfx-badge.mfx-secondary {
+    -fx-background-color: -secondary;
+    -fx-text-fill: -secondary-foreground;
+}
+
+.mfx-badge.mfx-secondary .ikonli-font-icon {
+    -fx-icon-color: -secondary-foreground;
+}
+
+.mfx-badge.mfx-destructive {
+    -fx-background-color: -destructive;
+    -fx-text-fill: #ffffff;
+}
+
+.dark .mfx-badge.mfx-destructive {
+    -fx-background-color: -destructive-60;
+}
+
+.mfx-badge.mfx-destructive .ikonli-font-icon {
+    -fx-icon-color: #ffffff;
+}
+
+.mfx-badge.mfx-outline {
+    -fx-background-color: transparent;
+    -fx-border-color: -border;
+    -fx-text-fill: -foreground;
+}
+
+.mfx-badge.mfx-outline .ikonli-font-icon {
+    -fx-icon-color: -foreground;
+}
+
+.mfx-alert {
+    -fx-background-color: -card;
+    -fx-background-radius: 10;
+    -fx-border-color: -border;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-padding: 12 16;
+    -fx-hgap: 12;
+    -fx-vgap: 2;
+}
+
+.mfx-alert .mfx-alert-title {
+    -fx-font-weight: 500;
+    -fx-text-fill: -card-foreground;
+}
+
+.mfx-alert .mfx-alert-description {
+    -fx-text-fill: -muted-foreground;
+    -fx-wrap-text: true;
+}
+
+.mfx-alert .ikonli-font-icon {
+    -fx-icon-size: 16;
+    -fx-icon-color: -card-foreground;
+}
+
+.mfx-alert.mfx-destructive .mfx-alert-title {
+    -fx-text-fill: -destructive;
+}
+
+.mfx-alert.mfx-destructive .mfx-alert-description {
+    -fx-text-fill: -destructive-90;
+}
+
+.mfx-alert.mfx-destructive .ikonli-font-icon {
+    -fx-icon-color: -destructive;
+}
+
+.mfx-avatar {
+    -fx-background-color: -muted;
+    -fx-background-radius: 9999;
+}
+
+.mfx-avatar > .label {
+    -fx-text-fill: -foreground;
+    -fx-font-size: 13px;
+}
+
+.mfx-skeleton {
+    -fx-background-color: -accent;
+    -fx-background-radius: 8;
+}
+
+.mfx-kbd {
+    -fx-background-color: -muted;
+    -fx-background-radius: 6;
+    -fx-text-fill: -muted-foreground;
+    -fx-padding: 0 4;
+    -fx-min-height: 20;
+    -fx-pref-height: 20;
+    -fx-font-size: 12px;
+    -fx-font-weight: 500;
+}
+
+.mfx-separator {
+    -fx-background-color: -border;
+}
