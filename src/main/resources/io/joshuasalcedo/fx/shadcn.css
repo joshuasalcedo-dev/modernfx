@@ -1,8 +1,7 @@
 /*
  * The shadcn/ui look for JavaFX. Every color comes from the tokens in tokens.css (-background, -primary,
- * -border, -ring-50...), so changing the tokens restyles everything. Sizes follow shadcn's classes
- * (h-9 = 36px, px-4 = 16px, rounded-md = radius * 0.8). Plain JavaFX controls get the look too; the
- * io.joshuasalcedo.fx.ui components add shadcn's variants (mfx-default, mfx-outline, mfx-sm...).
+ * -border, -ring-50...), so changing the tokens restyles everything. This file styles plain JavaFX controls;
+ * the ModernFX components (ButtonMfx, CardMfx...) are styled by components.css, generated from shadcn's .tsx.
  *
  * Focus rings: controls draw two borders, an outer 3px ring (transparent until focused) and the 1px border,
  * so hover can change the background without touching the ring.
@@ -13,6 +12,9 @@
 .root {
     -fx-font-size: 14px;
     -fx-background-color: -background;
+    /* The text color the components and icons inside a part use, unless they set their own: a part with a text
+       color (text-destructive) sets it for everything inside, as color is inherited in CSS on the web. */
+    -mfx-text: -foreground;
 
     -color-bg-default: -background;
     -color-bg-overlay: -popover;
@@ -64,11 +66,11 @@
 }
 
 .label {
-    -fx-text-fill: -foreground;
+    -fx-text-fill: -mfx-text;
 }
 
-.text {
-    -fx-fill: -foreground;
+.ikonli-font-icon {
+    -fx-icon-color: -mfx-text;
 }
 
 /* ------------------------------------------------------------ Button (plain JavaFX buttons look like "outline") */
@@ -115,183 +117,27 @@
 }
 
 /* JavaFX's default button (setDefaultButton) is shadcn's default variant. */
-.button:default,
-.button.mfx-default {
+.button:default {
     -fx-background-color: -primary;
     -fx-border-color: transparent, transparent;
     -fx-text-fill: -primary-foreground;
 }
 
-.button:default:hover,
-.button.mfx-default:hover {
+.button:default:hover {
     -fx-background-color: -primary-90;
     -fx-text-fill: -primary-foreground;
 }
 
-.button:default .ikonli-font-icon,
-.button.mfx-default .ikonli-font-icon {
+.button:default .ikonli-font-icon {
     -fx-icon-color: -primary-foreground;
-}
-
-.button.mfx-destructive {
-    -fx-background-color: -destructive;
-    -fx-border-color: transparent, transparent;
-    -fx-text-fill: #ffffff;
-}
-
-.button.mfx-destructive:hover {
-    -fx-background-color: -destructive-90;
-    -fx-text-fill: #ffffff;
-}
-
-.dark .button.mfx-destructive {
-    -fx-background-color: -destructive-60;
-}
-
-.button.mfx-destructive .ikonli-font-icon {
-    -fx-icon-color: #ffffff;
-}
-
-.button.mfx-secondary {
-    -fx-background-color: -secondary;
-    -fx-border-color: transparent, transparent;
-    -fx-text-fill: -secondary-foreground;
-}
-
-.button.mfx-secondary:hover {
-    -fx-background-color: -secondary-80;
-    -fx-text-fill: -secondary-foreground;
-}
-
-.button.mfx-secondary .ikonli-font-icon {
-    -fx-icon-color: -secondary-foreground;
-}
-
-.button.mfx-ghost {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent, transparent;
-    -fx-effect: null;
-}
-
-.button.mfx-ghost:hover {
-    -fx-background-color: -accent;
-}
-
-.dark .button.mfx-ghost:hover {
-    -fx-background-color: -accent-50;
-}
-
-.button.mfx-link {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent, transparent;
-    -fx-text-fill: -primary;
-    -fx-effect: null;
-}
-
-.button.mfx-link:hover {
-    -fx-background-color: transparent;
-    -fx-text-fill: -primary;
-    -fx-underline: true;
-}
-
-.button.mfx-link .ikonli-font-icon {
-    -fx-icon-color: -primary;
 }
 
 .button:focus-visible {
     -fx-border-color: -ring-50, -ring;
 }
 
-.button.mfx-destructive:focus-visible {
-    -fx-border-color: -destructive-20, -destructive;
-}
-
-.dark .button.mfx-destructive:focus-visible {
-    -fx-border-color: -destructive-40, -destructive;
-}
-
 .button:disabled {
     -fx-opacity: 0.5;
-}
-
-/* Sizes: default h-9 px-4; with an icon px-3 */
-.button.mfx-has-icon {
-    -fx-padding: 0 12;
-}
-
-.button.mfx-xs {
-    -fx-min-height: 24;
-    -fx-pref-height: 24;
-    -fx-padding: 0 8;
-    -fx-font-size: 12px;
-    -fx-graphic-text-gap: 4;
-    -fx-background-radius: 6;
-    -fx-border-radius: 9, 6;
-}
-
-.button.mfx-xs .ikonli-font-icon {
-    -fx-icon-size: 12;
-}
-
-.button.mfx-sm {
-    -fx-min-height: 32;
-    -fx-pref-height: 32;
-    -fx-padding: 0 12;
-    -fx-graphic-text-gap: 6;
-}
-
-.button.mfx-sm.mfx-has-icon {
-    -fx-padding: 0 10;
-}
-
-.button.mfx-lg {
-    -fx-min-height: 40;
-    -fx-pref-height: 40;
-    -fx-padding: 0 24;
-}
-
-.button.mfx-lg.mfx-has-icon {
-    -fx-padding: 0 16;
-}
-
-.button.mfx-icon,
-.button.mfx-icon-xs,
-.button.mfx-icon-sm,
-.button.mfx-icon-lg {
-    -fx-padding: 0;
-    -fx-content-display: graphic-only;
-}
-
-.button.mfx-icon {
-    -fx-min-width: 36;
-    -fx-pref-width: 36;
-    -fx-max-width: 36;
-}
-
-.button.mfx-icon-xs {
-    -fx-min-width: 24;
-    -fx-pref-width: 24;
-    -fx-max-width: 24;
-    -fx-min-height: 24;
-    -fx-pref-height: 24;
-    -fx-background-radius: 6;
-    -fx-border-radius: 9, 6;
-}
-
-.button.mfx-icon-sm {
-    -fx-min-width: 32;
-    -fx-pref-width: 32;
-    -fx-max-width: 32;
-    -fx-min-height: 32;
-    -fx-pref-height: 32;
-}
-
-.button.mfx-icon-lg {
-    -fx-min-width: 40;
-    -fx-pref-width: 40;
-    -fx-max-width: 40;
-    -fx-min-height: 40;
-    -fx-pref-height: 40;
 }
 
 /* ------------------------------------------------------------ Input, Textarea, Select */
@@ -622,186 +468,4 @@
     -fx-background-insets: 0;
     -fx-background-radius: 9999;
     -fx-padding: 4;
-}
-
-/* ------------------------------------------------------------ Components (io.joshuasalcedo.fx.ui) */
-
-.mfx-label {
-    -fx-font-size: 14px;
-    -fx-font-weight: 500;
-    -fx-text-fill: -foreground;
-}
-
-.mfx-label:disabled {
-    -fx-opacity: 0.5;
-}
-
-.mfx-muted {
-    -fx-text-fill: -muted-foreground;
-}
-
-.mfx-card {
-    -fx-background-color: -card;
-    -fx-background-radius: 14;
-    -fx-border-color: -border;
-    -fx-border-width: 1;
-    -fx-border-radius: 14;
-    -fx-padding: 24 0;
-    -fx-spacing: 24;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 4, 0, 0, 1);
-}
-
-.mfx-card-header {
-    -fx-padding: 0 24;
-    -fx-hgap: 8;
-    -fx-vgap: 6;
-}
-
-.mfx-card-title {
-    -fx-font-size: 16px;
-    -fx-font-weight: 600;
-    -fx-text-fill: -card-foreground;
-}
-
-.mfx-card-description {
-    -fx-text-fill: -muted-foreground;
-    -fx-wrap-text: true;
-}
-
-.mfx-card-content {
-    -fx-padding: 0 24;
-    -fx-spacing: 8;
-}
-
-.mfx-card-footer {
-    -fx-padding: 0 24;
-    -fx-spacing: 8;
-    -fx-alignment: center-left;
-}
-
-.mfx-card .label {
-    -fx-text-fill: -card-foreground;
-}
-
-.mfx-card .mfx-card-description,
-.mfx-card .mfx-muted {
-    -fx-text-fill: -muted-foreground;
-}
-
-.mfx-badge {
-    -fx-background-color: -primary;
-    -fx-background-radius: 8;
-    -fx-border-color: transparent;
-    -fx-border-width: 1;
-    -fx-border-radius: 8;
-    -fx-padding: 2 8;
-    -fx-font-size: 12px;
-    -fx-font-weight: 500;
-    -fx-text-fill: -primary-foreground;
-    -fx-graphic-text-gap: 4;
-}
-
-.mfx-badge .ikonli-font-icon {
-    -fx-icon-size: 12;
-    -fx-icon-color: -primary-foreground;
-}
-
-.mfx-badge.mfx-secondary {
-    -fx-background-color: -secondary;
-    -fx-text-fill: -secondary-foreground;
-}
-
-.mfx-badge.mfx-secondary .ikonli-font-icon {
-    -fx-icon-color: -secondary-foreground;
-}
-
-.mfx-badge.mfx-destructive {
-    -fx-background-color: -destructive;
-    -fx-text-fill: #ffffff;
-}
-
-.dark .mfx-badge.mfx-destructive {
-    -fx-background-color: -destructive-60;
-}
-
-.mfx-badge.mfx-destructive .ikonli-font-icon {
-    -fx-icon-color: #ffffff;
-}
-
-.mfx-badge.mfx-outline {
-    -fx-background-color: transparent;
-    -fx-border-color: -border;
-    -fx-text-fill: -foreground;
-}
-
-.mfx-badge.mfx-outline .ikonli-font-icon {
-    -fx-icon-color: -foreground;
-}
-
-.mfx-alert {
-    -fx-background-color: -card;
-    -fx-background-radius: 10;
-    -fx-border-color: -border;
-    -fx-border-width: 1;
-    -fx-border-radius: 10;
-    -fx-padding: 12 16;
-    -fx-hgap: 12;
-    -fx-vgap: 2;
-}
-
-.mfx-alert .mfx-alert-title {
-    -fx-font-weight: 500;
-    -fx-text-fill: -card-foreground;
-}
-
-.mfx-alert .mfx-alert-description {
-    -fx-text-fill: -muted-foreground;
-    -fx-wrap-text: true;
-}
-
-.mfx-alert .ikonli-font-icon {
-    -fx-icon-size: 16;
-    -fx-icon-color: -card-foreground;
-}
-
-.mfx-alert.mfx-destructive .mfx-alert-title {
-    -fx-text-fill: -destructive;
-}
-
-.mfx-alert.mfx-destructive .mfx-alert-description {
-    -fx-text-fill: -destructive-90;
-}
-
-.mfx-alert.mfx-destructive .ikonli-font-icon {
-    -fx-icon-color: -destructive;
-}
-
-.mfx-avatar {
-    -fx-background-color: -muted;
-    -fx-background-radius: 9999;
-}
-
-.mfx-avatar > .label {
-    -fx-text-fill: -foreground;
-    -fx-font-size: 13px;
-}
-
-.mfx-skeleton {
-    -fx-background-color: -accent;
-    -fx-background-radius: 8;
-}
-
-.mfx-kbd {
-    -fx-background-color: -muted;
-    -fx-background-radius: 6;
-    -fx-text-fill: -muted-foreground;
-    -fx-padding: 0 4;
-    -fx-min-height: 20;
-    -fx-pref-height: 20;
-    -fx-font-size: 12px;
-    -fx-font-weight: 500;
-}
-
-.mfx-separator {
-    -fx-background-color: -border;
 }

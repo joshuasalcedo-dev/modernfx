@@ -145,7 +145,9 @@ public class GenerateStyles {
 
         String select(String utility) {
             String name = prefix.isEmpty() ? utility : prefix + ":" + utility;
-            return selector.formatted(safe(name));
+            String cls = safe(name);
+            // a utility named like one of JavaFX's own style classes would style JavaFX's nodes: prefix it
+            return selector.formatted(RESERVED.contains(cls) ? "tw-" + cls : cls);
         }
     }
 
@@ -377,7 +379,8 @@ public class GenerateStyles {
             transition("transition-opacity", "-fx-opacity", dur, ease);
             transition("transition-shadow", "-fx-effect", dur, ease);
             transition("transition-transform", transformProps, dur, ease);
-            rule("transition-none", ONLY_BASE, "transition-property: none;");
+            // "transition-property: none" makes JavaFX 27 throw (TransitionDefinitionConverter); no duration does the same.
+            rule("transition-none", ONLY_BASE, "transition-duration: 0ms;");
             int[] times = {0, 75, 100, 150, 200, 300, 500, 700, 1000};
             for (int t : times) {
                 rule("duration-" + t, ONLY_BASE, "transition-duration: " + t + "ms;");
@@ -628,11 +631,24 @@ public class GenerateStyles {
 
                     /// The corner radii in pixels: `"lg"` for `rounded-lg`, `""` for `rounded`.
                     public static final Map<String, Double> RADII = Map.ofEntries(%s);
+
+                    /// Utilities whose names JavaFX, AtlantaFX or ControlsFX already use as style classes
+                    /// (every TextField is `text-input`): their style class is `tw-` + the name (`tw-border`).
+                    public static final java.util.Set<String> RESERVED = java.util.Set.of(%s);
                 }
-                """.formatted(version, list, alphas, fmt(spacing) + ".0", radiusMap);
+                """.formatted(version, list, alphas, fmt(spacing) + ".0", radiusMap,
+                String.join(", ", RESERVED.stream().sorted().map(r -> "\"" + r + "\"").toList()));
     }
 
     // ---------------------------------------------------------------- parsing
+
+    /**
+     * Utility names that are also style classes of JavaFX, AtlantaFX or ControlsFX (e.g. every TextField has
+     * "text-input", AtlantaFX's popover has a ".border" shape). They are written as "tw-border"... instead; Tw maps them.
+     * Found by comparing tailwind.css with the stylesheets in those jars.
+     */
+    static final java.util.Set<String> RESERVED = java.util.Set.of(
+            "border", "border-muted", "invisible", "rounded", "text-input", "text-muted");
 
     static String safe(String className) {
         return className.replace(':', '_').replace('.', '_').replace('/', '_');

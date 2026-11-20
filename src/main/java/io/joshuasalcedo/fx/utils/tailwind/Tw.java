@@ -96,7 +96,9 @@ public final class Tw {
 
     /// The JavaFX style class for a Tailwind class: `hover:bg-red-500` -> `hover_bg-red-500`.
     public static String styleClass(String twClass) {
-        return twClass.replace(':', '_').replace('.', '_').replace('/', '_');
+        String cls = twClass.replace(':', '_').replace('.', '_').replace('/', '_');
+        // `border`, `rounded`, `text-input`... are also JavaFX's own style classes: their utilities are `tw-border`...
+        return Tailwind.RESERVED.contains(cls) ? "tw-" + cls : cls;
     }
 
     /// Joins class strings, skipping nulls and blanks: `Tw.cx("p-4", active ? "bg-accent" : null)`.

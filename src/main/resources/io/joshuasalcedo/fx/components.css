@@ -1,0 +1,530 @@
+/* The ModernFX components' look, one section per component. Started by tools/GenerateComponent.java
+   from shadcn's .tsx; edit it freely (running the generator again replaces that component's section). */
+
+/* ===== button ===== */
+/* button.tsx */
+.mfx-button { -fx-text-fill: -mfx-text; -fx-background-radius: 8; -fx-font-size: 14px; -fx-font-weight: 500; -fx-wrap-text: false; -fx-border-color: transparent; -fx-border-width: 1; -fx-border-insets: 0; -fx-border-radius: 8; -fx-alignment: center; }
+.mfx-button .ikonli-font-icon { -fx-icon-color: -mfx-text; }
+.mfx-button:focus-visible { -fx-border-color: -ring-50, -ring; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 11, 8; -fx-background-radius: 8; }
+.mfx-button:disabled { -fx-opacity: 0.5; }
+.mfx-button:invalid { -fx-border-color: -destructive-20, -destructive; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 11, 8; -fx-background-radius: 8; }
+.dark .mfx-button:invalid { -fx-border-color: -destructive-40, -destructive-50; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 11, 8; -fx-background-radius: 8; }
+.mfx-button-variant-default { -fx-background-color: -primary; -mfx-text: -primary-foreground; -fx-text-fill: -primary-foreground; -fx-fill: -primary-foreground; }
+.mfx-button-variant-default .ikonli-font-icon { -fx-icon-color: -primary-foreground; }
+.mfx-button-variant-default:hover { -fx-background-color: -primary-80; }
+.mfx-button-variant-outline { -fx-background-color: -background; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 1); -fx-border-color: -border; -fx-border-width: 1; -fx-border-insets: 0; -fx-border-radius: 8; -fx-background-radius: 8; }
+.mfx-button-variant-outline:hover { -fx-background-color: -muted; -mfx-text: -foreground; -fx-text-fill: -foreground; -fx-fill: -foreground; }
+.mfx-button-variant-outline:hover .ikonli-font-icon { -fx-icon-color: -foreground; }
+.mfx-button-variant-outline:showing { -fx-background-color: -muted; -mfx-text: -foreground; -fx-text-fill: -foreground; -fx-fill: -foreground; }
+.mfx-button-variant-outline:showing .ikonli-font-icon { -fx-icon-color: -foreground; }
+.dark .mfx-button-variant-outline { -fx-background-color: -input-30; -fx-border-color: -input; -fx-border-width: 1; -fx-border-insets: 0; -fx-border-radius: 8; -fx-background-radius: 8; }
+.dark .mfx-button-variant-outline:hover { -fx-background-color: -input-50; }
+.mfx-button-variant-secondary { -fx-background-color: -secondary; -mfx-text: -secondary-foreground; -fx-text-fill: -secondary-foreground; -fx-fill: -secondary-foreground; }
+.mfx-button-variant-secondary .ikonli-font-icon { -fx-icon-color: -secondary-foreground; }
+.mfx-button-variant-secondary:showing { -fx-background-color: -secondary; -mfx-text: -secondary-foreground; -fx-text-fill: -secondary-foreground; -fx-fill: -secondary-foreground; }
+.mfx-button-variant-secondary:showing .ikonli-font-icon { -fx-icon-color: -secondary-foreground; }
+.mfx-button-variant-ghost:hover { -fx-background-color: -muted; -mfx-text: -foreground; -fx-text-fill: -foreground; -fx-fill: -foreground; }
+.mfx-button-variant-ghost:hover .ikonli-font-icon { -fx-icon-color: -foreground; }
+.mfx-button-variant-ghost:showing { -fx-background-color: -muted; -mfx-text: -foreground; -fx-text-fill: -foreground; -fx-fill: -foreground; }
+.mfx-button-variant-ghost:showing .ikonli-font-icon { -fx-icon-color: -foreground; }
+.dark .mfx-button-variant-ghost:hover { -fx-background-color: -muted-50; }
+.mfx-button-variant-destructive { -fx-background-color: -destructive-10; -mfx-text: -destructive; -fx-text-fill: -destructive; -fx-fill: -destructive; }
+.mfx-button-variant-destructive .ikonli-font-icon { -fx-icon-color: -destructive; }
+.mfx-button-variant-destructive:hover { -fx-background-color: -destructive-20; }
+.mfx-button-variant-destructive:focus-visible { -fx-border-color: -destructive-20, -destructive-40; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 11, 8; -fx-background-radius: 8; }
+.dark .mfx-button-variant-destructive { -fx-background-color: -destructive-20; }
+.dark .mfx-button-variant-destructive:hover { -fx-background-color: -destructive-30; }
+.dark .mfx-button-variant-destructive:focus-visible { -fx-border-color: -destructive-40, -destructive-40; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 11, 8; -fx-background-radius: 8; }
+.mfx-button-variant-link { -mfx-text: -primary; -fx-text-fill: -primary; -fx-fill: -primary; }
+.mfx-button-variant-link .ikonli-font-icon { -fx-icon-color: -primary; }
+.mfx-button-variant-link:hover { -fx-underline: true; }
+.mfx-button-size-default { -fx-min-height: 36; -fx-pref-height: 36; -fx-max-height: 36; -fx-graphic-text-gap: 6; -fx-padding: 0 10 0 10; }
+.mfx-button-size-xs { -fx-min-height: 24; -fx-pref-height: 24; -fx-max-height: 24; -fx-graphic-text-gap: 4; -fx-background-radius: 8; -fx-font-size: 12px; -fx-padding: 0 8 0 8; -fx-border-radius: 8; }
+.mfx-button-size-sm { -fx-min-height: 32; -fx-pref-height: 32; -fx-max-height: 32; -fx-graphic-text-gap: 4; -fx-background-radius: 10; -fx-padding: 0 10 0 10; -fx-border-radius: 10; }
+.mfx-button-size-lg { -fx-min-height: 40; -fx-pref-height: 40; -fx-max-height: 40; -fx-graphic-text-gap: 6; -fx-padding: 0 10 0 10; }
+.mfx-button-size-icon { -fx-min-width: 36; -fx-pref-width: 36; -fx-max-width: 36; -fx-min-height: 36; -fx-pref-height: 36; -fx-max-height: 36; }
+.mfx-button-size-icon-xs { -fx-min-width: 24; -fx-pref-width: 24; -fx-max-width: 24; -fx-min-height: 24; -fx-pref-height: 24; -fx-max-height: 24; -fx-background-radius: 8; -fx-border-radius: 8; }
+.mfx-button-size-icon-sm { -fx-min-width: 32; -fx-pref-width: 32; -fx-max-width: 32; -fx-min-height: 32; -fx-pref-height: 32; -fx-max-height: 32; -fx-background-radius: 10; -fx-border-radius: 10; }
+.mfx-button-size-icon-lg { -fx-min-width: 40; -fx-pref-width: 40; -fx-max-width: 40; -fx-min-height: 40; -fx-pref-height: 40; -fx-max-height: 40; }
+/* ===== end button ===== */
+
+/* ===== badge ===== */
+/* badge.tsx */
+.mfx-badge { -fx-text-fill: -mfx-text; -fx-min-height: 20; -fx-pref-height: 20; -fx-max-height: 20; -fx-graphic-text-gap: 4; -fx-background-radius: 26; -fx-font-size: 12px; -fx-font-weight: 500; -fx-wrap-text: false; -fx-padding: 2 8 2 8; -fx-border-color: transparent; -fx-border-width: 1; -fx-border-insets: 0; -fx-border-radius: 26; -fx-alignment: center; }
+.mfx-badge .ikonli-font-icon { -fx-icon-color: -mfx-text; }
+.mfx-badge:focus-visible { -fx-border-color: -ring-50, -ring; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 29, 26; -fx-background-radius: 26; }
+.mfx-badge:invalid { -fx-border-color: -destructive; -fx-border-width: 1; -fx-border-insets: 0; -fx-border-radius: 26; -fx-background-radius: 26; }
+.dark .mfx-badge:invalid { -fx-border-color: -destructive; -fx-border-width: 1; -fx-border-insets: 0; -fx-border-radius: 26; -fx-background-radius: 26; }
+.mfx-badge-variant-default { -fx-background-color: -primary; -mfx-text: -primary-foreground; -fx-text-fill: -primary-foreground; -fx-fill: -primary-foreground; }
+.mfx-badge-variant-default .ikonli-font-icon { -fx-icon-color: -primary-foreground; }
+.mfx-badge-variant-secondary { -fx-background-color: -secondary; -mfx-text: -secondary-foreground; -fx-text-fill: -secondary-foreground; -fx-fill: -secondary-foreground; }
+.mfx-badge-variant-secondary .ikonli-font-icon { -fx-icon-color: -secondary-foreground; }
+.mfx-badge-variant-destructive { -fx-background-color: -destructive-10; -mfx-text: -destructive; -fx-text-fill: -destructive; -fx-fill: -destructive; }
+.mfx-badge-variant-destructive .ikonli-font-icon { -fx-icon-color: -destructive; }
+.mfx-badge-variant-destructive:focus-visible { -fx-border-color: -destructive-20, -ring; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 29, 26; -fx-background-radius: 26; }
+.dark .mfx-badge-variant-destructive { -fx-background-color: -destructive-20; }
+.dark .mfx-badge-variant-destructive:focus-visible { -fx-border-color: -destructive-40, -ring; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 29, 26; -fx-background-radius: 26; }
+.mfx-badge-variant-outline { -mfx-text: -foreground; -fx-text-fill: -foreground; -fx-fill: -foreground; -fx-border-color: -border; -fx-border-width: 1; -fx-border-insets: 0; -fx-border-radius: 26; -fx-background-radius: 26; }
+.mfx-badge-variant-outline .ikonli-font-icon { -fx-icon-color: -foreground; }
+.mfx-badge-variant-ghost:hover { -fx-background-color: -muted; -mfx-text: -muted-foreground; -fx-text-fill: -muted-foreground; -fx-fill: -muted-foreground; }
+.mfx-badge-variant-ghost:hover .ikonli-font-icon { -fx-icon-color: -muted-foreground; }
+.dark .mfx-badge-variant-ghost:hover { -fx-background-color: -muted-50; }
+.mfx-badge-variant-link { -mfx-text: -primary; -fx-text-fill: -primary; -fx-fill: -primary; }
+.mfx-badge-variant-link .ikonli-font-icon { -fx-icon-color: -primary; }
+.mfx-badge-variant-link:hover { -fx-underline: true; }
+/* ===== end badge ===== */
+
+/* ===== card ===== */
+/* card.tsx */
+.mfx-card { -fx-spacing: 24; -fx-background-radius: 14; -fx-background-color: -card; -fx-font-size: 14px; -mfx-text: -card-foreground; -fx-text-fill: -card-foreground; -fx-fill: -card-foreground; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 1); -fx-padding: 24 0 24 0; -fx-border-color: -foreground-10, -border; -fx-border-width: 1, 0; -fx-border-insets: -1, 0; -fx-border-radius: 15, 14; }
+.mfx-card-size-sm { -fx-spacing: 16; -fx-padding: 16 0 16 0; }
+.mfx-card-header { -fx-spacing: 4; -fx-padding: 0 24 0 24; -fx-alignment: top-left; }
+.mfx-card-size-sm .mfx-card-header { -fx-padding: 0 16 0 16; }
+.mfx-card-title { -fx-text-fill: -mfx-text; -fx-font-size: 16px; -fx-font-weight: 500; }
+.mfx-card-title .ikonli-font-icon { -fx-icon-color: -mfx-text; }
+.mfx-card-size-sm .mfx-card-title { -fx-font-size: 14px; }
+.mfx-card-description { -fx-text-fill: -muted-foreground; -fx-font-size: 14px; -mfx-text: -muted-foreground; -fx-fill: -muted-foreground; }
+.mfx-card-description .ikonli-font-icon { -fx-icon-color: -muted-foreground; }
+.mfx-card-content { -fx-spacing: 12; -fx-padding: 0 24 0 24; }
+.mfx-card-size-sm .mfx-card-content { -fx-padding: 0 16 0 16; }
+.mfx-card-footer { -fx-padding: 0 24 0 24; -fx-alignment: center-left; }
+.mfx-card-size-sm .mfx-card-footer { -fx-padding: 0 16 0 16; }
+/* ===== end card ===== */
+
+/* ===== input ===== */
+/* input.tsx */
+.mfx-input { -fx-text-fill: -mfx-text; -fx-min-height: 36; -fx-pref-height: 36; -fx-max-height: 36; -fx-max-width: 100000000; -fx-min-width: 0; -fx-background-radius: 8; -fx-background-color: transparent; -fx-font-size: 16px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 1); -fx-prompt-text-fill: -muted-foreground; -fx-padding: 4 10 4 10; -fx-border-color: -input; -fx-border-width: 1; -fx-border-insets: 0; -fx-border-radius: 8; }
+.mfx-input:focus-visible { -fx-border-color: -ring-50, -ring; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 11, 8; -fx-background-radius: 8; }
+.mfx-input:disabled { -fx-opacity: 0.5; }
+.mfx-input:invalid { -fx-border-color: -destructive-20, -destructive; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 11, 8; -fx-background-radius: 8; }
+.dark .mfx-input { -fx-background-color: -input-30; }
+.dark .mfx-input:invalid { -fx-border-color: -destructive-40, -destructive-50; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 11, 8; -fx-background-radius: 8; }
+/* ===== end input ===== */
+
+/* ===== textarea ===== */
+/* textarea.tsx */
+.mfx-textarea { -fx-text-fill: -mfx-text; -fx-min-height: 64; -fx-max-width: 100000000; -fx-background-radius: 8; -fx-background-color: transparent; -fx-font-size: 16px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 1); -fx-prompt-text-fill: -muted-foreground; -fx-padding: 8 10 8 10; -fx-border-color: -input; -fx-border-width: 1; -fx-border-insets: 0; -fx-border-radius: 8; }
+.mfx-textarea:focus-visible { -fx-border-color: -ring-50, -ring; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 11, 8; -fx-background-radius: 8; }
+.mfx-textarea:disabled { -fx-opacity: 0.5; }
+.mfx-textarea:invalid { -fx-border-color: -destructive-20, -destructive; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 11, 8; -fx-background-radius: 8; }
+.dark .mfx-textarea { -fx-background-color: -input-30; }
+.dark .mfx-textarea:invalid { -fx-border-color: -destructive-40, -destructive-50; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 11, 8; -fx-background-radius: 8; }
+/* ===== end textarea ===== */
+
+/* ===== label ===== */
+/* label.tsx */
+.mfx-label { -fx-text-fill: -mfx-text; -fx-graphic-text-gap: 8; -fx-font-size: 14px; -fx-font-weight: 500; -fx-alignment: center-left; }
+.mfx-label .ikonli-font-icon { -fx-icon-color: -mfx-text; }
+/* ===== end label ===== */
+
+/* ===== separator ===== */
+/* separator.tsx */
+.mfx-separator { -fx-background-color: -border; }
+.mfx-separator-orientation-horizontal { -fx-min-height: 1; -fx-pref-height: 1; -fx-max-height: 1; -fx-max-width: 100000000; }
+.mfx-separator-orientation-vertical { -fx-min-width: 1; -fx-pref-width: 1; -fx-max-width: 1; }
+/* ===== end separator ===== */
+
+/* ===== skeleton ===== */
+/* skeleton.tsx */
+.mfx-skeleton { -fx-background-radius: 8; -fx-background-color: -muted; -fx-border-radius: 8; }
+/* ===== end skeleton ===== */
+
+/* ===== kbd ===== */
+/* kbd.tsx */
+.mfx-kbd { -fx-text-fill: -muted-foreground; -fx-min-height: 20; -fx-pref-height: 20; -fx-max-height: 20; -fx-min-width: 20; -fx-graphic-text-gap: 4; -fx-background-radius: 6; -fx-background-color: -muted; -fx-font-family: "System"; -fx-font-size: 12px; -fx-font-weight: 500; -mfx-text: -muted-foreground; -fx-fill: -muted-foreground; -fx-padding: 0 4 0 4; -fx-border-radius: 6; -fx-alignment: center; }
+.mfx-kbd .ikonli-font-icon { -fx-icon-color: -muted-foreground; }
+.mfx-kbd-group { -fx-spacing: 4; -fx-alignment: center-left; }
+/* ===== end kbd ===== */
+
+/* ===== checkbox ===== */
+/* checkbox.tsx */
+.mfx-checkbox > .box { -fx-text-fill: -mfx-text; -fx-min-width: 16; -fx-pref-width: 16; -fx-max-width: 16; -fx-min-height: 16; -fx-pref-height: 16; -fx-max-height: 16; -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 1); -fx-border-color: -input; -fx-border-width: 1; -fx-border-insets: 0; -fx-border-radius: 4; -fx-alignment: center; }
+.mfx-checkbox > .box .ikonli-font-icon { -fx-icon-color: -mfx-text; }
+.mfx-checkbox:focus-visible > .box { -fx-border-color: -ring-50, -ring; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 7, 4; -fx-background-radius: 4; }
+.mfx-checkbox:disabled > .box { -fx-opacity: 0.5; }
+.mfx-checkbox:invalid > .box { -fx-border-color: -destructive-20, -destructive; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 7, 4; -fx-background-radius: 4; }
+.mfx-checkbox:selected > .box { -fx-background-color: -primary; -mfx-text: -primary-foreground; -fx-text-fill: -primary-foreground; -fx-fill: -primary-foreground; -fx-border-color: -primary; -fx-border-width: 1; -fx-border-insets: 0; -fx-border-radius: 4; -fx-background-radius: 4; }
+.mfx-checkbox:selected > .box .ikonli-font-icon { -fx-icon-color: -primary-foreground; }
+.mfx-checkbox:invalid:selected > .box { -fx-border-color: -destructive-20, -primary; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 7, 4; -fx-background-radius: 4; }
+.dark .mfx-checkbox > .box { -fx-background-color: -input-30; }
+.dark .mfx-checkbox:invalid > .box { -fx-border-color: -destructive-40, -destructive-50; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 7, 4; -fx-background-radius: 4; }
+.dark .mfx-checkbox:selected > .box { -fx-background-color: -primary; }
+.mfx-checkbox > .box > .mark { }
+/* ===== end checkbox ===== */
+
+/* ===== switch ===== */
+/* switch.tsx */
+.mfx-switch > .thumb-area { -fx-text-fill: -mfx-text; -fx-background-radius: 9999; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 1); -fx-background-color: -input; -fx-border-color: transparent; -fx-border-width: 1; -fx-border-insets: 0; -fx-border-radius: 9999; -fx-alignment: center-left; }
+.mfx-switch > .thumb-area .ikonli-font-icon { -fx-icon-color: -mfx-text; }
+.mfx-switch:focus-visible > .thumb-area { -fx-border-color: -ring-50, -ring; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 10002, 9999; -fx-background-radius: 9999; }
+.mfx-switch:invalid > .thumb-area { -fx-border-color: -destructive-20, -destructive; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 10002, 9999; -fx-background-radius: 9999; }
+.mfx-switch:selected > .thumb-area { -fx-background-color: -primary; }
+.mfx-switch:disabled > .thumb-area { -fx-opacity: 0.5; }
+.mfx-switch-size-default > .thumb-area { -fx-min-height: 18.4; -fx-pref-height: 18.4; -fx-max-height: 18.4; -fx-min-width: 32; -fx-pref-width: 32; -fx-max-width: 32; }
+.mfx-switch-size-sm > .thumb-area { -fx-min-height: 14; -fx-pref-height: 14; -fx-max-height: 14; -fx-min-width: 24; -fx-pref-width: 24; -fx-max-width: 24; }
+.dark .mfx-switch > .thumb-area { -fx-background-color: -input-80; }
+.dark .mfx-switch:invalid > .thumb-area { -fx-border-color: -destructive-40, -destructive-50; -fx-border-width: 3, 1; -fx-border-insets: -3, 0; -fx-border-radius: 10002, 9999; -fx-background-radius: 9999; }
+.mfx-switch > .thumb { -fx-background-radius: 9999; -fx-background-color: -background; -fx-border-color: -border; -fx-border-width: 0; -fx-border-insets: 0; -fx-border-radius: 9999; }
+.mfx-switch-size-default > .thumb { -fx-min-width: 16; -fx-pref-width: 16; -fx-max-width: 16; -fx-min-height: 16; -fx-pref-height: 16; -fx-max-height: 16; -fx-translate-x: 0; }
+.mfx-switch-size-sm > .thumb { -fx-min-width: 12; -fx-pref-width: 12; -fx-max-width: 12; -fx-min-height: 12; -fx-pref-height: 12; -fx-max-height: 12; -fx-translate-x: 0; }
+.dark .mfx-switch > .thumb { -fx-background-color: -foreground; }
+.dark .mfx-switch:selected > .thumb { -fx-background-color: -primary-foreground; }
+/* ===== end switch ===== */
+
+/* ===== progress ===== */
+/* progress.tsx */
+.mfx-progress > .track { -fx-min-height: 6; -fx-pref-height: 6; -fx-max-height: 6; -fx-max-width: 100000000; -fx-background-radius: 9999; -fx-background-color: -muted; -fx-border-radius: 9999; -fx-alignment: center-left; }
+.mfx-progress > .bar { -fx-max-height: 100000000; -fx-background-color: -primary; }
+.mfx-progress-label { -fx-text-fill: -mfx-text; -fx-font-size: 14px; -fx-font-weight: 500; }
+.mfx-progress-label .ikonli-font-icon { -fx-icon-color: -mfx-text; }
+.mfx-progress-value { -fx-text-fill: -muted-foreground; -fx-font-size: 14px; -mfx-text: -muted-foreground; -fx-fill: -muted-foreground; }
+.mfx-progress-value .ikonli-font-icon { -fx-icon-color: -muted-foreground; }
+/* ===== end progress ===== */
+
+/* ===== alert ===== */
+/* alert.tsx */
+.mfx-alert { -fx-max-width: 100000000; -fx-spacing: 2; -fx-background-radius: 10; -fx-text-alignment: left; -fx-alignment: center-left; -fx-font-size: 14px; -fx-padding: 12 16 12 16; -fx-border-color: -border; -fx-border-width: 1; -fx-border-insets: 0; -fx-border-radius: 10; }
+.mfx-alert-variant-default { -fx-background-color: -card; -mfx-text: -card-foreground; -fx-text-fill: -card-foreground; -fx-fill: -card-foreground; }
+.mfx-alert-variant-destructive { -fx-background-color: -card; -mfx-text: -destructive; -fx-text-fill: -destructive; -fx-fill: -destructive; }
+.mfx-alert-title { -fx-text-fill: -mfx-text; -fx-font-weight: 500; }
+.mfx-alert-title .ikonli-font-icon { -fx-icon-color: -mfx-text; }
+.mfx-alert-description { -fx-text-fill: -muted-foreground; -fx-font-size: 14px; -mfx-text: -muted-foreground; -fx-fill: -muted-foreground; }
+.mfx-alert-description .ikonli-font-icon { -fx-icon-color: -muted-foreground; }
+/* ===== end alert ===== */
+
+/* ===== avatar ===== */
+/* avatar.tsx */
+.mfx-avatar { -fx-min-width: 32; -fx-pref-width: 32; -fx-max-width: 32; -fx-min-height: 32; -fx-pref-height: 32; -fx-max-height: 32; -fx-background-radius: 9999; -fx-border-radius: 9999; }
+.mfx-avatar-size-lg { -fx-min-width: 40; -fx-pref-width: 40; -fx-max-width: 40; -fx-min-height: 40; -fx-pref-height: 40; -fx-max-height: 40; }
+.mfx-avatar-size-sm { -fx-min-width: 24; -fx-pref-width: 24; -fx-max-width: 24; -fx-min-height: 24; -fx-pref-height: 24; -fx-max-height: 24; }
+.mfx-avatar-image { -fx-background-radius: 9999; -fx-border-radius: 9999; }
+.mfx-avatar-fallback { -fx-text-fill: -muted-foreground; -fx-max-width: 100000000; -fx-max-height: 100000000; -fx-background-radius: 9999; -fx-background-color: -muted; -fx-font-size: 14px; -mfx-text: -muted-foreground; -fx-fill: -muted-foreground; -fx-border-radius: 9999; -fx-alignment: center; }
+.mfx-avatar-fallback .ikonli-font-icon { -fx-icon-color: -muted-foreground; }
+.mfx-avatar-size-sm .mfx-avatar-fallback { -fx-font-size: 12px; }
+.mfx-avatar-badge { -fx-view-order: -10; -fx-background-radius: 9999; -fx-background-color: -primary; -mfx-text: -primary-foreground; -fx-text-fill: -primary-foreground; -fx-fill: -primary-foreground; -fx-border-color: -background, -border; -fx-border-width: 2, 0; -fx-border-insets: -2, 0; -fx-border-radius: 10001, 9999; -fx-alignment: center; }
+.mfx-avatar-size-sm .mfx-avatar-badge { -fx-min-width: 8; -fx-pref-width: 8; -fx-max-width: 8; -fx-min-height: 8; -fx-pref-height: 8; -fx-max-height: 8; }
+.mfx-avatar-size-default .mfx-avatar-badge { -fx-min-width: 10; -fx-pref-width: 10; -fx-max-width: 10; -fx-min-height: 10; -fx-pref-height: 10; -fx-max-height: 10; }
+.mfx-avatar-size-lg .mfx-avatar-badge { -fx-min-width: 12; -fx-pref-width: 12; -fx-max-width: 12; -fx-min-height: 12; -fx-pref-height: 12; -fx-max-height: 12; }
+.mfx-avatar-group-count { -fx-min-width: 32; -fx-pref-width: 32; -fx-max-width: 32; -fx-min-height: 32; -fx-pref-height: 32; -fx-max-height: 32; -fx-background-radius: 9999; -fx-background-color: -muted; -fx-font-size: 14px; -mfx-text: -muted-foreground; -fx-text-fill: -muted-foreground; -fx-fill: -muted-foreground; -fx-border-color: -background, -border; -fx-border-width: 2, 0; -fx-border-insets: -2, 0; -fx-border-radius: 10001, 9999; -fx-alignment: center; }
+/* ===== end avatar ===== */
+
+/* ===== sheet ===== */
+/* sheet: ControlsFX's SpreadsheetView as SheetMfx, in shadcn's data-table look. Written by hand (shadcn has no
+   spreadsheet); every color is a token, so it follows light and dark. */
+.mfx-sheet {
+    -fx-background-color: -background;
+    -fx-background-radius: 10;
+    -fx-border-color: -border;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-padding: 1;
+    -fx-font-size: 14px;
+}
+.mfx-sheet .table-view,
+.mfx-sheet .table-view:focused,
+.mfx-sheet .table-view > .virtual-flow > .clipped-container > .sheet {
+    -fx-background-color: -background;
+    -fx-background-insets: 0;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+}
+.mfx-sheet .column-header-background,
+.mfx-sheet .table-view .filler,
+.mfx-sheet .table-view > .column-header-background > .filler {
+    -fx-background-color: -muted;
+}
+.mfx-sheet .spreadsheet-cell {
+    -fx-background-color: -background;
+    -fx-background-insets: 0;
+    -fx-border-color: -border;
+    -fx-border-width: 0 1 1 0;
+    -fx-text-fill: -foreground;
+    -fx-padding: 0 8;
+}
+.mfx-sheet .spreadsheet-cell:hover {
+    -fx-background-color: -muted-50;
+    -fx-text-fill: -foreground;
+}
+.mfx-sheet .spreadsheet-cell:filled:selected,
+.mfx-sheet .spreadsheet-cell:filled:selected:hover {
+    -fx-background-color: -primary-10;
+    -fx-border-color: -border;
+    -fx-border-width: 0 1 1 0;
+    -fx-text-fill: -foreground;
+}
+/* the active cell: shadcn's focus ring */
+.mfx-sheet .spreadsheet-cell:filled:focused,
+.mfx-sheet .spreadsheet-cell:filled:focused:selected,
+.mfx-sheet .spreadsheet-cell:filled:focused:selected:hover {
+    -fx-background-color: -background;
+    -fx-border-color: -ring;
+    -fx-border-width: 2;
+    -fx-text-fill: -foreground;
+}
+/* headers: the column names on top, the row numbers on the left */
+.mfx-sheet VerticalHeader > Label,
+.mfx-sheet HorizontalHeaderColumn > TableColumnHeader.column-header.table-column {
+    -fx-background-color: -muted;
+    -fx-background-insets: 0;
+    -fx-border-color: -border;
+    -fx-border-width: 0 1 1 0;
+    -fx-text-fill: -muted-foreground;
+    -fx-font-weight: 500;
+    -fx-font-style: normal;
+}
+.mfx-sheet HorizontalHeaderColumn > TableColumnHeader.column-header.table-column > Label,
+.mfx-sheet HorizontalHeaderColumn > TableColumnHeader.column-header.table-column .label {
+    -fx-text-fill: -muted-foreground;
+    -fx-font-weight: 500;
+}
+.mfx-sheet VerticalHeader > Label.selected,
+.mfx-sheet HorizontalHeaderColumn > TableColumnHeader.column-header.table-column.selected,
+.mfx-sheet HorizontalHeaderColumn > TableColumnHeader.column-header.table-column.selected > Label {
+    -fx-background-color: -accent;
+    -fx-text-fill: -accent-foreground;
+}
+.mfx-sheet VerticalHeader > Label.fixed,
+.mfx-sheet HorizontalHeaderColumn > TableColumnHeader.column-header.table-column.fixed {
+    -fx-background-color: -secondary;
+    -fx-font-style: normal;
+}
+/* the rectangle around a selected range */
+.mfx-sheet .selection-rectangle {
+    -fx-stroke: -ring;
+    -fx-stroke-width: 2;
+    -fx-fill: transparent;
+}
+/* the editor while typing in a cell */
+.mfx-sheet CellView > .text-input.text-field,
+.mfx-sheet CellView > .text-input.text-area {
+    -fx-background-color: -background;
+    -fx-border-width: 0;
+    -fx-text-fill: -foreground;
+    -fx-highlight-fill: -primary;
+    -fx-highlight-text-fill: -primary-foreground;
+    -fx-effect: null;
+}
+.mfx-sheet .cell-corner {
+    -fx-background-color: -destructive;
+}
+.mfx-sheet .picker-label {
+    -fx-background-color: -background;
+}
+.mfx-sheet .indicationLabel {
+    -fx-text-fill: -muted-foreground;
+}
+/* ===== end sheet ===== */
+
+/* ===== modal ===== */
+/* modal: the dimmed layer under dialogs and drawers (AtlantaFX ModalPane) */
+.mfx-modal { -fx-background-color: rgba(0, 0, 0, 0.5); }
+.mfx-modal > .scroll-pane, .mfx-modal > .scroll-pane > .viewport { -fx-background-color: transparent; }
+/* ===== end modal ===== */
+
+/* ===== dialog ===== */
+/* dialog, alert-dialog */
+.mfx-dialog-box { -fx-background-color: -background; -fx-background-radius: 10; -fx-border-color: -border; -fx-border-width: 1; -fx-border-radius: 10; -fx-padding: 24; -fx-spacing: 16; -fx-pref-width: 512; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 22, 0, 0, 10); }
+.mfx-dialog-header { -fx-spacing: 8; }
+.mfx-dialog-title { -fx-font-size: 18px; -fx-font-weight: 600; -fx-text-fill: -foreground; }
+.mfx-dialog-description { -fx-font-size: 14px; -fx-text-fill: -muted-foreground; }
+.mfx-dialog-content { -fx-spacing: 12; }
+.mfx-dialog-footer { -fx-spacing: 8; -fx-alignment: center-right; }
+.mfx-dialog-close { -fx-translate-x: -12; -fx-translate-y: 12; -fx-opacity: 0.7; }
+.mfx-dialog-close:hover { -fx-opacity: 1; }
+/* ===== end dialog ===== */
+
+/* ===== drawer ===== */
+/* drawer: shadcn's sheet and drawer */
+.mfx-drawer { -fx-background-color: -background; -fx-spacing: 16; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 22, 0, 0, 10); -fx-border-color: -border; }
+.mfx-drawer-right { -fx-border-width: 0 0 0 1; }
+.mfx-drawer-left { -fx-border-width: 0 1 0 0; }
+.mfx-drawer-top { -fx-border-width: 0 0 1 0; }
+.mfx-drawer-bottom { -fx-border-width: 1 0 0 0; -fx-background-radius: 10 10 0 0; -fx-border-radius: 10 10 0 0; }
+.mfx-drawer-header { -fx-padding: 16; -fx-spacing: 8; -fx-alignment: top-left; }
+.mfx-drawer-text { -fx-spacing: 6; }
+.mfx-drawer-title { -fx-font-size: 16px; -fx-font-weight: 600; -fx-text-fill: -foreground; }
+.mfx-drawer-description { -fx-font-size: 14px; -fx-text-fill: -muted-foreground; }
+.mfx-drawer-content { -fx-padding: 0 16; -fx-spacing: 12; }
+.mfx-drawer-footer { -fx-padding: 16; -fx-spacing: 8; -fx-alignment: center-right; }
+/* ===== end drawer ===== */
+
+/* ===== popover ===== */
+/* popover, hover-card (AtlantaFX Popover, no arrow) */
+.mfx-popover { -fx-background-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 9, 0, 0, 4); }
+.mfx-popover > .border { -fx-fill: -popover; -fx-stroke: -border; -fx-stroke-width: 1; }
+.mfx-popover > .content { -fx-padding: 16; }
+.mfx-popover > .content .label { -fx-text-fill: -popover-foreground; }
+/* ===== end popover ===== */
+
+/* ===== toast ===== */
+/* toast (Sonner): AtlantaFX Notification, stacked bottom-right */
+.mfx-toaster { -fx-padding: 16; -fx-spacing: 8; }
+.mfx-toast { -fx-background-color: transparent; -fx-padding: 0; }
+.mfx-toast > .container { -fx-background-color: -popover; -fx-background-radius: 10; -fx-border-color: -border; -fx-border-width: 1; -fx-border-radius: 10; -fx-padding: 14 16; -fx-spacing: 8; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 22, 0, 0, 10); }
+.mfx-toast > .container > .header > .message Text { -fx-fill: -popover-foreground; -fx-font-size: 13px; }
+.mfx-toast > .container > .header > .actions > .close-button > .icon { -fx-background-color: -muted-foreground; }
+.mfx-toast > .container > .header > .actions > .close-button:hover { -fx-background-color: -accent; }
+.mfx-toast .ikonli-font-icon { -fx-icon-size: 16; -fx-icon-color: -foreground; }
+.mfx-toast-success .ikonli-font-icon { -fx-icon-color: -green-600; }
+.mfx-toast-info .ikonli-font-icon { -fx-icon-color: -blue-600; }
+.mfx-toast-warning .ikonli-font-icon { -fx-icon-color: -amber-600; }
+.mfx-toast-error .ikonli-font-icon { -fx-icon-color: -red-600; }
+.mfx-toast-action { -fx-background-color: -primary; -fx-text-fill: -primary-foreground; -fx-background-radius: 6; -fx-padding: 0 8; -fx-min-height: 24; -fx-pref-height: 24; -fx-font-size: 12px; -fx-font-weight: 500; -fx-border-width: 0; -fx-effect: null; }
+/* ===== end toast ===== */
+
+/* ===== menu ===== */
+/* dropdown-menu, context-menu, menubar (the popup itself is styled for every menu in shadcn.css) */
+.menu-item > .accelerator-text { -fx-text-fill: -muted-foreground; -fx-font-size: 12px; }
+.menu-item .ikonli-font-icon { -fx-icon-size: 16; -fx-icon-color: -muted-foreground; }
+.menu-item:focused .ikonli-font-icon { -fx-icon-color: -accent-foreground; }
+.separator-menu-item { -fx-padding: 4 -4 4 -4; }
+.separator-menu-item > .line { -fx-border-color: -border transparent transparent transparent; -fx-border-width: 1 0 0 0; -fx-padding: 0; }
+.check-menu-item:checked > .left-container > .check, .radio-menu-item:checked > .left-container > .radio { -fx-background-color: -foreground; }
+.mfx-menu-label-item, .mfx-menu-label-item:disabled { -fx-opacity: 1; -fx-padding: 6 8; }
+.mfx-menu-label { -fx-text-fill: -foreground; -fx-font-size: 14px; -fx-font-weight: 500; }
+.mfx-menu-destructive > .label { -fx-text-fill: -destructive; }
+.mfx-menu-destructive .ikonli-font-icon { -fx-icon-color: -destructive; }
+.mfx-menu-destructive:focused { -fx-background-color: -destructive-10; }
+.mfx-dropdown-menu { -fx-background-color: -background; -fx-background-radius: 8; -fx-border-color: -input; -fx-border-width: 1; -fx-border-radius: 8; -fx-padding: 0 12; -fx-min-height: 36; -fx-pref-height: 36; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 1); -fx-graphic-text-gap: 8; }
+.mfx-dropdown-menu:hover, .mfx-dropdown-menu:showing { -fx-background-color: -accent; }
+.dark .mfx-dropdown-menu { -fx-background-color: -input-30; }
+.dark .mfx-dropdown-menu:hover, .dark .mfx-dropdown-menu:showing { -fx-background-color: -input-50; }
+.mfx-dropdown-menu > .label { -fx-text-fill: -foreground; -fx-font-size: 14px; -fx-font-weight: 500; -fx-padding: 0; }
+.mfx-dropdown-menu > .arrow-button, .mfx-dropdown-menu > .arrow-button > .arrow { -fx-padding: 0; -fx-background-color: transparent; -fx-shape: null; }
+.mfx-dropdown-menu .ikonli-font-icon { -fx-icon-size: 14; -fx-icon-color: -muted-foreground; }
+.mfx-dropdown-menu:focused { -fx-border-color: -ring; }
+.mfx-menubar { -fx-background-color: -background; -fx-background-radius: 8; -fx-border-color: -border; -fx-border-width: 1; -fx-border-radius: 8; -fx-padding: 4; -fx-spacing: 4; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 1); }
+.mfx-menubar > .container { -fx-spacing: 2; }
+.mfx-menubar > .container > .menu-button { -fx-background-color: transparent; -fx-background-radius: 4; -fx-padding: 4 8; -fx-border-width: 0; }
+.mfx-menubar > .container > .menu-button:hover, .mfx-menubar > .container > .menu-button:showing { -fx-background-color: -accent; }
+.mfx-menubar > .container > .menu-button > .label { -fx-text-fill: -foreground; -fx-font-size: 14px; -fx-font-weight: 500; -fx-padding: 0; }
+/* ===== end menu ===== */
+
+/* ===== select ===== */
+/* select, combobox (the field and its list are styled for every combo box in shadcn.css) */
+.mfx-select:invalid, .mfx-combobox:invalid { -fx-border-color: transparent, -destructive; }
+.mfx-select > .list-cell { -fx-text-fill: -foreground; }
+.mfx-combobox > .text-field, .mfx-combobox .text-field { -fx-background-color: transparent; -fx-border-width: 0; -fx-effect: null; -fx-padding: 0 0 0 12; }
+/* ===== end select ===== */
+
+/* ===== tabs ===== */
+/* tabs: the names in a muted pill, the chosen one raised */
+.mfx-tabs > .tab-header-area { -fx-padding: 0 0 8 0; -fx-background-color: transparent; -fx-border-width: 0; }
+.mfx-tabs > .tab-header-area > .tab-header-background { -fx-background-color: transparent; -fx-border-width: 0; -fx-effect: null; }
+.mfx-tabs > .tab-header-area > .headers-region { -fx-background-color: -muted; -fx-background-radius: 10; -fx-padding: 3; }
+.mfx-tabs > .tab-header-area > .headers-region > .tab { -fx-background-color: transparent; -fx-background-insets: 0; -fx-background-radius: 8; -fx-border-color: transparent; -fx-border-width: 1; -fx-border-radius: 8; -fx-padding: 2 12; -fx-min-height: 29; -fx-pref-height: 29; -fx-effect: null; }
+.mfx-tabs > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label { -fx-text-fill: -muted-foreground; -fx-font-size: 14px; -fx-font-weight: 500; -fx-alignment: center; }
+.mfx-tabs > .tab-header-area > .headers-region > .tab:hover > .tab-container > .tab-label { -fx-text-fill: -foreground; }
+.mfx-tabs > .tab-header-area > .headers-region > .tab:selected { -fx-background-color: -background; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 4, 0, 0, 1); }
+.dark .mfx-tabs > .tab-header-area > .headers-region > .tab:selected { -fx-background-color: -input-30; -fx-border-color: -input; }
+.mfx-tabs > .tab-header-area > .headers-region > .tab:selected > .tab-container > .tab-label { -fx-text-fill: -foreground; }
+.mfx-tabs > .tab-header-area > .headers-region > .tab > .tab-container > .focus-indicator { -fx-border-color: transparent; }
+.mfx-tabs > .tab-content-area { -fx-background-color: transparent; -fx-padding: 0; }
+/* ===== end tabs ===== */
+
+/* ===== accordion ===== */
+/* accordion: AtlantaFX's Accordion and TitledPane as they are (their colors follow the tokens) */
+/* ===== end accordion ===== */
+
+/* ===== calendar ===== */
+/* calendar, and the date picker's popup */
+.mfx-calendar { -fx-background-color: transparent; -fx-padding: 0; -fx-border-width: 0; }
+.mfx-calendar .date-picker-popup { -fx-background-color: -background; -fx-effect: null; }
+.date-picker-popup { -fx-background-color: -popover; -fx-padding: 12; -fx-border-color: -border; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 9, 0, 0, 4); }
+.mfx-calendar > .month-year-pane, .date-picker-popup > .month-year-pane { -fx-background-color: transparent; -fx-padding: 0 0 8 0; }
+.mfx-calendar > .month-year-pane > .label, .date-picker-popup > .month-year-pane .label { -fx-text-fill: -foreground; -fx-font-size: 14px; -fx-font-weight: 500; }
+.mfx-calendar > .month-year-pane > .button, .mfx-calendar > .month-year-pane > .back-button, .mfx-calendar > .month-year-pane > .forward-button, .date-picker-popup > .month-year-pane > .spinner > .button { -fx-background-color: transparent; -fx-background-radius: 6; -fx-border-color: -border; -fx-border-width: 1; -fx-border-radius: 6; -fx-min-width: 28; -fx-min-height: 28; -fx-pref-width: 28; -fx-pref-height: 28; -fx-padding: 0; -fx-effect: null; }
+.mfx-calendar > .month-year-pane > .back-button > .left-arrow, .mfx-calendar > .month-year-pane > .forward-button > .right-arrow, .date-picker-popup > .month-year-pane > .spinner > .button > .left-arrow, .date-picker-popup > .month-year-pane > .spinner > .button > .right-arrow { -fx-background-color: -foreground; }
+.mfx-calendar > .calendar-grid, .date-picker-popup > .calendar-grid { -fx-background-color: transparent; -fx-hgap: 2; -fx-vgap: 2; -fx-padding: 0; }
+.mfx-calendar > .calendar-grid > .day-name-cell, .date-picker-popup > .calendar-grid > .day-name-cell { -fx-min-width: 36; -fx-text-overrun: clip; -fx-text-fill: -muted-foreground; -fx-font-size: 12.8px; -fx-font-weight: normal; -fx-background-color: transparent; }
+.mfx-calendar > .calendar-grid > .day-cell, .date-picker-popup > .calendar-grid > .day-cell { -fx-background-color: transparent; -fx-background-radius: 6; -fx-background-insets: 0; -fx-border-width: 0; -fx-text-fill: -foreground; -fx-font-size: 14px; -fx-min-width: 36; -fx-min-height: 32; -fx-pref-width: 36; -fx-pref-height: 32; -fx-padding: 0; -fx-alignment: center; }
+.mfx-calendar > .calendar-grid > .day-cell:hover, .date-picker-popup > .calendar-grid > .day-cell:hover { -fx-background-color: -accent; -fx-text-fill: -accent-foreground; }
+.mfx-calendar > .calendar-grid > .today, .date-picker-popup > .calendar-grid > .today { -fx-background-color: -accent; -fx-text-fill: -accent-foreground; }
+.mfx-calendar > .calendar-grid > .previous-month, .date-picker-popup > .calendar-grid > .previous-month, .mfx-calendar > .calendar-grid > .next-month, .date-picker-popup > .calendar-grid > .next-month { -fx-text-fill: -muted-foreground; }
+.mfx-calendar > .calendar-grid > .selected, .date-picker-popup > .calendar-grid > .selected, .mfx-calendar > .calendar-grid > .selected:hover, .date-picker-popup > .calendar-grid > .selected:hover { -fx-background-color: -primary; -fx-text-fill: -primary-foreground; }
+.mfx-date-picker > .text-field, .mfx-date-picker > .text-field:focused { -fx-background-color: transparent; -fx-border-width: 0; -fx-effect: null; -fx-padding: 0 0 0 12; -fx-min-height: 34; -fx-pref-height: 34; }
+/* ===== end calendar ===== */
+
+/* ===== breadcrumb ===== */
+/* breadcrumb */
+.mfx-breadcrumb { -fx-spacing: 6; -fx-alignment: center-left; }
+.mfx-breadcrumb .mfx-breadcrumb-link, .mfx-breadcrumb .mfx-breadcrumb-page { -fx-padding: 0; -fx-border-width: 0; -fx-underline: false; -fx-font-size: 14px; }
+.mfx-breadcrumb .mfx-breadcrumb-link, .mfx-breadcrumb .mfx-breadcrumb-link:visited { -fx-text-fill: -muted-foreground; }
+.mfx-breadcrumb .mfx-breadcrumb-link:hover { -fx-text-fill: -foreground; }
+.mfx-breadcrumb .mfx-breadcrumb-page, .mfx-breadcrumb .mfx-breadcrumb-page:visited, .mfx-breadcrumb .mfx-breadcrumb-page:hover { -fx-text-fill: -foreground; -fx-cursor: default; }
+.mfx-breadcrumb-separator { -fx-icon-size: 14; -fx-icon-color: -muted-foreground; }
+/* ===== end breadcrumb ===== */
+
+/* ===== slider ===== */
+/* slider */
+.mfx-slider > .track { -fx-background-color: -muted; -fx-background-radius: 9999; -fx-background-insets: 0; -fx-padding: 3; }
+.mfx-slider > .progress { -fx-background-color: -primary; -fx-background-radius: 9999; }
+.mfx-slider > .thumb { -fx-background-color: -primary, -background; -fx-background-insets: 0, 1; -fx-background-radius: 9999; -fx-padding: 8; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 4, 0, 0, 1); }
+.mfx-slider:disabled { -fx-opacity: 0.5; }
+/* ===== end slider ===== */
+
+/* ===== radiogroup ===== */
+/* radio-group (the radio buttons are styled for every radio button in shadcn.css) */
+.mfx-radio-group { -fx-spacing: 12; }
+/* ===== end radiogroup ===== */
+
+/* ===== togglegroup ===== */
+/* toggle-group */
+.mfx-toggle-group { -fx-spacing: 0; -fx-alignment: center-left; }
+.mfx-toggle-group-item { -fx-background-color: transparent; -fx-background-radius: 0; -fx-background-insets: 0; -fx-border-color: transparent; -fx-border-width: 0; -fx-border-radius: 0; -fx-padding: 0 10; -fx-min-height: 36; -fx-pref-height: 36; -fx-min-width: 36; -fx-text-fill: -foreground; -fx-font-size: 14px; -fx-font-weight: 500; -fx-effect: null; }
+.mfx-toggle-group-item.mfx-first { -fx-background-radius: 8 0 0 8; -fx-border-radius: 8 0 0 8; }
+.mfx-toggle-group-item.mfx-last { -fx-background-radius: 0 8 8 0; -fx-border-radius: 0 8 8 0; }
+.mfx-toggle-group-item.mfx-first.mfx-last { -fx-background-radius: 8; -fx-border-radius: 8; }
+.mfx-toggle-group-item:hover { -fx-background-color: -muted; -fx-text-fill: -muted-foreground; }
+.mfx-toggle-group-item:selected, .mfx-toggle-group-item:selected:hover { -fx-background-color: -accent; -fx-text-fill: -accent-foreground; }
+.mfx-toggle-group-variant-outline > .mfx-toggle-group-item { -fx-border-color: -input; -fx-border-width: 1 0 1 1; }
+.mfx-toggle-group-variant-outline > .mfx-toggle-group-item.mfx-last { -fx-border-width: 1; }
+/* ===== end togglegroup ===== */
+
+/* ===== resizable ===== */
+/* resizable */
+.mfx-resizable { -fx-background-color: transparent; -fx-background-insets: 0; -fx-border-color: -border; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 0; }
+.mfx-resizable > .split-pane-divider { -fx-background-color: -border; -fx-background-insets: 0; -fx-padding: 0 0.5 0 0.5; -fx-border-width: 0; }
+.mfx-resizable:vertical > .split-pane-divider { -fx-padding: 0.5 0 0.5 0; }
+.mfx-resizable > .split-pane-divider > .horizontal-grabber, .mfx-resizable > .split-pane-divider > .vertical-grabber { -fx-background-color: transparent; -fx-padding: 0; }
+.mfx-resizable-handle > .split-pane-divider > .horizontal-grabber { -fx-background-color: -border, -background; -fx-background-insets: 0, 1; -fx-background-radius: 3, 2; -fx-padding: 8 5; }
+.mfx-resizable-handle > .split-pane-divider > .vertical-grabber { -fx-background-color: -border, -background; -fx-background-insets: 0, 1; -fx-background-radius: 3, 2; -fx-padding: 5 8; }
+/* ===== end resizable ===== */
+
+/* ===== scrollarea ===== */
+/* scroll-area */
+.mfx-scroll-area, .mfx-scroll-area > .viewport, .mfx-scroll-area > .corner { -fx-background-color: transparent; -fx-background-insets: 0; -fx-border-width: 0; -fx-padding: 0; }
+.mfx-scroll-area > .scroll-bar { -fx-background-color: transparent; -fx-padding: 1; }
+.mfx-scroll-area > .scroll-bar:vertical { -fx-pref-width: 10; }
+.mfx-scroll-area > .scroll-bar:horizontal { -fx-pref-height: 10; }
+.mfx-scroll-area > .scroll-bar > .track, .mfx-scroll-area > .scroll-bar > .track-background { -fx-background-color: transparent; -fx-border-width: 0; }
+.mfx-scroll-area > .scroll-bar > .thumb { -fx-background-color: -border; -fx-background-radius: 9999; -fx-background-insets: 0; }
+.mfx-scroll-area > .scroll-bar > .increment-button, .mfx-scroll-area > .scroll-bar > .decrement-button { -fx-padding: 0; -fx-background-color: transparent; }
+.mfx-scroll-area > .scroll-bar > .increment-button > .increment-arrow, .mfx-scroll-area > .scroll-bar > .decrement-button > .decrement-arrow { -fx-padding: 0; -fx-shape: null; }
+/* ===== end scrollarea ===== */
+
+/* ===== pagination ===== */
+/* pagination */
+.mfx-pagination { -fx-padding: 0; -fx-page-information-visible: false; -fx-arrows-visible: true; -fx-background-color: transparent; }
+.mfx-pagination > .pagination-control { -fx-background-color: transparent; -fx-padding: 0; }
+.mfx-pagination > .pagination-control > .control-box { -fx-spacing: 4; -fx-padding: 0; }
+.mfx-pagination > .pagination-control > .control-box > .number-button, .mfx-pagination > .pagination-control > .control-box > .left-arrow-button, .mfx-pagination > .pagination-control > .control-box > .right-arrow-button { -fx-background-color: transparent; -fx-background-radius: 8; -fx-background-insets: 0; -fx-border-color: transparent; -fx-border-width: 1; -fx-border-radius: 8; -fx-min-width: 36; -fx-min-height: 36; -fx-pref-height: 36; -fx-padding: 0 10; -fx-text-fill: -foreground; -fx-font-size: 14px; -fx-font-weight: 500; -fx-effect: null; }
+.mfx-pagination > .pagination-control > .control-box > .number-button:hover, .mfx-pagination > .pagination-control > .control-box > .left-arrow-button:hover, .mfx-pagination > .pagination-control > .control-box > .right-arrow-button:hover { -fx-background-color: -accent; }
+.mfx-pagination > .pagination-control > .control-box > .number-button:selected { -fx-background-color: -background; -fx-border-color: -border; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 1); }
+.mfx-pagination > .pagination-control > .control-box > .left-arrow-button > .left-arrow, .mfx-pagination > .pagination-control > .control-box > .right-arrow-button > .right-arrow { -fx-background-color: -foreground; }
+.mfx-pagination > .pagination-control > .page-information { visibility: hidden; -fx-padding: 0; }
+/* ===== end pagination ===== */
+
+/* ===== table ===== */
+/* table: a line under each row, a muted row on hover and selection */
+.mfx-table, .mfx-table:focused { -fx-background-color: -background; -fx-background-insets: 0; -fx-background-radius: 10; -fx-border-color: -border; -fx-border-width: 1; -fx-border-radius: 10; -fx-padding: 1; -fx-effect: null; }
+.mfx-table > .column-header-background, .mfx-table > .column-header-background > .filler { -fx-background-color: transparent; -fx-border-color: -border; -fx-border-width: 0 0 1 0; }
+.mfx-table .column-header { -fx-background-color: transparent; -fx-background-insets: 0; -fx-border-width: 0; -fx-min-height: 40; -fx-pref-height: 40; -fx-padding: 0 8; }
+.mfx-table .column-header > .label { -fx-padding: 0; -fx-text-fill: -foreground; -fx-font-size: 14px; -fx-font-weight: 500; -fx-alignment: center-left; }
+.mfx-table .table-row-cell { -fx-background-color: -background; -fx-background-insets: 0; -fx-border-color: -border; -fx-border-width: 0 0 1 0; -fx-cell-size: 40; }
+.mfx-table .table-row-cell:hover { -fx-background-color: -muted-50; }
+.mfx-table .table-row-cell:selected, .mfx-table:focused .table-row-cell:selected { -fx-background-color: -muted; }
+.mfx-table .table-row-cell:empty { -fx-background-color: transparent; -fx-border-width: 0; }
+.mfx-table .table-cell { -fx-background-color: transparent; -fx-border-width: 0; -fx-padding: 0 8; -fx-text-fill: -foreground; -fx-font-size: 14px; -fx-alignment: center-left; }
+.mfx-table .placeholder .label { -fx-text-fill: -muted-foreground; }
+/* ===== end table ===== */

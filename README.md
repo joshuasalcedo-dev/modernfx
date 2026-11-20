@@ -95,11 +95,23 @@ The store saves 300 ms after the last change and on `close()`. It writes to a te
 the real one, so a crash mid-save doesn't break it. A file it can't read is renamed to `state.json.broken`. When the
 state's shape changes, raise `version(n)` and add a `migrate(n - 1, json -> ...)` step. Never keep secrets in it.
 
+## Running on the module path
+
+`SheetMfx` (ControlsFX's SpreadsheetView) needs two JavaFX internals opened to ControlsFX when your app runs as a
+module (in an IDE too). Add these JVM options; on the classpath nothing is needed:
+
+```
+--add-exports=javafx.base/com.sun.javafx.event=org.controlsfx.controls
+--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=org.controlsfx.controls
+```
+
+Without them, `SheetMfx` stops with a message listing these options.
+
 ## Packages
 
 | Package | What |
 |---|---|
-| `io.joshuasalcedo.fx.application` | The app shell: `ThemeMfx` (light/dark) |
+| `io.joshuasalcedo.fx.utils.theme` | `ThemeMfx`: the look, light/dark |
 | `io.joshuasalcedo.fx.utils.tailwind` | `Tw`, `TwColor` (the Tailwind palette) |
 | `io.joshuasalcedo.fx.utils.state` | `Store`, `PersistentStore`, `AppDirs` |
 | `io.joshuasalcedo.fx.ui.core.*` | The components: `button`, `input`, `card`, `dialog`, `table`... |
@@ -118,6 +130,15 @@ java tools/GenerateStyles.java
 ```
 
 To use another shadcn theme, put its `globals.css` in `tools/input/shadcn-globals.css` and run it again.
+
+## Releasing
+
+Releases go to Maven Central through the Central Portal (`mvn deploy -Pcentral`: sources, Javadoc, GPG signatures).
+Push a tag `vX.Y.Z`, or run the Release workflow by hand with a version. The upload then waits under Deployments on
+[central.sonatype.com](https://central.sonatype.com) until someone presses Publish; nothing is public before that.
+
+From your own computer: `mvn -Pcentral deploy` (the Central Portal token is server id `central` in
+`~/.m2/settings.xml`; gpg signs with your default key).
 
 ## License
 

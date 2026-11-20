@@ -25,4 +25,8 @@ public final class Tailwind {
 
     /// The corner radii in pixels: `"lg"` for `rounded-lg`, `""` for `rounded`.
     public static final Map<String, Double> RADII = Map.ofEntries(Map.entry("", 4.0), Map.entry("none", 0.0), Map.entry("xs", 2.0), Map.entry("sm", 6.0), Map.entry("md", 8.0), Map.entry("lg", 10.0), Map.entry("xl", 14.0), Map.entry("2xl", 18.0), Map.entry("3xl", 22.0), Map.entry("4xl", 26.0), Map.entry("full", 9999.0));
+
+    /// Utilities whose names JavaFX, AtlantaFX or ControlsFX already use as style classes
+    /// (every TextField is `text-input`): their style class is `tw-` + the name (`tw-border`).
+    public static final java.util.Set<String> RESERVED = java.util.Set.of("border", "border-muted", "invisible", "rounded", "text-input", "text-muted");
 }

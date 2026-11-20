@@ -199,4 +199,60 @@
             <url>https://repository.swaswa.cloud/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
+
+    <profiles>
+        <!-- mvn deploy -Pcentral publishes to Maven Central through the Central Portal: sources, Javadoc and GPG
+             signatures, as Central asks. The token is server id "central" in ~/.m2/settings.xml; the GPG key is
+             the one in the local keyring (or in CI, the key setup-java imports).
+             autoPublish is off: the upload is checked and waits under "Deployments" on central.sonatype.com
+             until someone presses Publish there. Nothing is public before that. -->
+        <profile>
+            <id>central</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals><goal>jar</goal></goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <doclint>none</doclint>
+                            <quiet>true</quiet>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.2.8</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals><goal>sign</goal></goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- In CI the passphrase comes from MAVEN_GPG_PASSPHRASE; locally gpg-agent asks. -->
+                            <bestPractices>true</bestPractices>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>0.12.0</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <autoPublish>false</autoPublish>
+                            <waitUntil>validated</waitUntil>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

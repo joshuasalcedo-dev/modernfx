@@ -1,4 +1,4 @@
-package io.joshuasalcedo.fx.application;
+package io.joshuasalcedo.fx.utils.theme;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -47,7 +47,7 @@ class StylesheetsTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"tokens.css", "tailwind.css", "shadcn.css"})
+    @ValueSource(strings = {"tokens.css", "tailwind.css", "shadcn.css", "components.css"})
     void parsesWithoutErrorsAndUsesKnownProperties(String file) throws Exception {
         CssParser.errorsProperty().clear();
         long start = System.nanoTime();
@@ -74,7 +74,7 @@ class StylesheetsTest {
     @Test
     void theRulesStayFastToParse() throws Exception {
         long start = System.nanoTime();
-        for (String f : List.of("tokens.css", "tailwind.css", "shadcn.css")) {
+        for (String f : List.of("tokens.css", "tailwind.css", "shadcn.css", "components.css")) {
             new CssParser().parse(StylesheetsTest.class.getResource("/io/joshuasalcedo/fx/" + f));
         }
         long ms = (System.nanoTime() - start) / 1_000_000;
@@ -90,7 +90,10 @@ class StylesheetsTest {
                 Text.getClassCssMetaData(), Rectangle.getClassCssMetaData(), Tooltip.getClassCssMetaData(),
                 new FontIcon().getCssMetaData(),
                 javafx.scene.control.skin.TextInputControlSkin.getClassCssMetaData(),
-                javafx.scene.control.skin.ProgressBarSkin.getClassCssMetaData());
+                javafx.scene.control.skin.ProgressBarSkin.getClassCssMetaData(),
+                javafx.scene.control.skin.PaginationSkin.getClassCssMetaData(),
+                javafx.scene.control.Pagination.getClassCssMetaData(),
+                javafx.scene.control.skin.CellSkinBase.getClassCssMetaData());
         for (var list : lists) {
             for (var meta : list) {
                 names.add(meta.getProperty());

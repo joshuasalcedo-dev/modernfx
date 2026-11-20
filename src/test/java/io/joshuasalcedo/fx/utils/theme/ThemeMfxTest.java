@@ -1,4 +1,4 @@
-package io.joshuasalcedo.fx.application;
+package io.joshuasalcedo.fx.utils.theme;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,9 +31,9 @@ class ThemeMfxTest {
 
     @Test
     void installsTheStylesheetsInOrder() {
-        assertThat(scene.getStylesheets()).hasSize(3);
+        assertThat(scene.getStylesheets()).hasSize(4);
         assertThat(scene.getStylesheets().get(0)).endsWith("tokens.css");
-        assertThat(scene.getStylesheets().get(2)).endsWith("tailwind.css");
+        assertThat(scene.getStylesheets().get(3)).endsWith("tailwind.css");
     }
 
     @Test

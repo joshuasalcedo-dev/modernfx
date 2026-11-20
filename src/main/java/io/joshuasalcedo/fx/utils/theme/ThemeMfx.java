@@ -1,4 +1,4 @@
-package io.joshuasalcedo.fx.application;
+package io.joshuasalcedo.fx.utils.theme;
 
 import atlantafx.base.theme.PrimerDark;
 import atlantafx.base.theme.PrimerLight;
@@ -39,7 +39,8 @@ public final class ThemeMfx {
 
     private static final String STATE = ThemeMfx.class.getName();
     private static final List<String> STYLESHEETS = List.of(
-            stylesheet("tokens.css"), stylesheet("shadcn.css"), stylesheet("tailwind.css"));
+            stylesheet("tokens.css"), stylesheet("shadcn.css"), stylesheet("components.css"),
+            stylesheet("tailwind.css"));
     private static final String LIGHT_BASE = new PrimerLight().getUserAgentStylesheet();
     private static final String DARK_BASE = new PrimerDark().getUserAgentStylesheet();
 
@@ -96,7 +97,7 @@ public final class ThemeMfx {
         setMode(scene, isDark(scene) ? Mode.LIGHT : Mode.DARK);
     }
 
-    /// The URL of one of the library's stylesheets: `tokens.css`, `shadcn.css` or `tailwind.css`.
+    /// The URL of one of the library's stylesheets: `tokens.css`, `shadcn.css`, `components.css` or `tailwind.css`.
     public static String stylesheet(String name) {
         var url = ThemeMfx.class.getResource("/io/joshuasalcedo/fx/" + name);
         if (url == null) {
