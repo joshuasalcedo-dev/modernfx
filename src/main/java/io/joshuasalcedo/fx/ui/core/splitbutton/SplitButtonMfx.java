@@ -13,16 +13,18 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Control;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Skin;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /// A main action with a dropdown arrow beside it for the other actions. Clicking the text runs `onAction`; clicking
-/// the arrow opens the menu.
+/// the arrow (or Alt+Down) opens the menu. Enter and Space run the main action.
 ///
 /// ```java
 /// var send = new SplitButtonMfx("Send");
 /// send.setOnAction(e -> send());
 /// send.getItems().addAll(new MenuItem("Send later"), new MenuItem("Send to all"));
 /// ```
+@NullMarked
 public class SplitButtonMfx extends Control {
 
     public static final String STYLE_CLASS = "mfx-split-button";
@@ -32,7 +34,12 @@ public class SplitButtonMfx extends Control {
             new SimpleObjectProperty<>(this, "variant", ButtonVariant.PRIMARY);
     private final ObjectProperty<ButtonSize> size = new SimpleObjectProperty<>(this, "size", ButtonSize.MD);
     private final ObjectProperty<@Nullable EventHandler<ActionEvent>> onAction =
-            new SimpleObjectProperty<>(this, "onAction");
+            new SimpleObjectProperty<>(this, "onAction") {
+                @Override
+                protected void invalidated() {
+                    setEventHandler(ActionEvent.ACTION, get());
+                }
+            };
     private final ObservableList<MenuItem> items = FXCollections.observableArrayList();
 
     public SplitButtonMfx() {
@@ -41,6 +48,7 @@ public class SplitButtonMfx extends Control {
 
     public SplitButtonMfx(String text) {
         getStyleClass().add(STYLE_CLASS);
+        setFocusTraversable(true);
         setText(text);
     }
 
@@ -73,12 +81,14 @@ public class SplitButtonMfx extends Control {
 
     /// Runs the main action, as a click on the main part does.
     public void fire() {
-        // TODO: unless disabled, fireEvent(new ActionEvent()) and route it to onAction
+        if (!isDisabled()) {
+            fireEvent(new ActionEvent(this, this));
+        }
     }
 
     /// Opens the menu under the arrow.
     public void show() {
-        if (getSkin() instanceof SplitButtonSkinMfx skin) {
+        if (!isDisabled() && getSkin() instanceof SplitButtonSkinMfx skin) {
             skin.showMenu();
         }
     }

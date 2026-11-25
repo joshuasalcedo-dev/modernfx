@@ -1,0 +1,87 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Copyright 2015-2022 The original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/* Copied from desktoppanefx-core. Changed for ModernFX: the colors are the shadcn tokens (tokens.css), so the
+   windows look like cards and follow light and dark. */
+
+.desktoppane-taskbar {
+    -fx-background-color: -background;
+    -fx-border-color: -border transparent transparent transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-padding: 4;
+}
+.desktoppane-taskbar > .viewport {
+    -fx-background-color: transparent;
+}
+
+.taskbar-icon {
+    -fx-background-color: -card;
+    -fx-background-radius: 8;
+    -fx-border-color: -border;
+    -fx-border-radius: 8;
+    -fx-text-fill: -card-foreground;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 1);
+}
+.taskbar-icon .ikonli-font-icon {
+    -fx-icon-color: -muted-foreground;
+}
+
+.internal-window {
+    -fx-background-color: -card;
+    -fx-border-color: -border;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.12), 16, 0, 0, 4);
+}
+.internal-window:active {
+    -fx-border-color: -ring;
+}
+
+.internal-window-titlebar {
+    -fx-background-color: -muted;
+    -fx-border-color: transparent transparent -border transparent;
+    -fx-background-radius: 10 10 0 0;
+    -fx-border-radius: 10 10 0 0;
+    -fx-padding: 2 4;
+}
+.internal-window:active .internal-window-titlebar {
+    -fx-background-color: -card;
+}
+
+.internal-window-titlebar-title {
+    -fx-font-weight: 600;
+    -fx-text-fill: -foreground;
+}
+.internal-window-titlebar .ikonli-font-icon {
+    -fx-icon-color: -muted-foreground;
+}
+
+.internal-window-titlebar-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 6;
+    -fx-border-width: 0;
+    -fx-padding: 4;
+}
+.internal-window-titlebar-button:hover {
+    -fx-background-color: -accent;
+}
+
+.internal-window-content {
+    -fx-background-color: -card;
+    -fx-background-radius: 0 0 10 10;
+}

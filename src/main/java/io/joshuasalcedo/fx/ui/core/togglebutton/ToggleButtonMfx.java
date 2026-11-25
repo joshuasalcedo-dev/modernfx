@@ -2,11 +2,22 @@ package io.joshuasalcedo.fx.ui.core.togglebutton;
 
 import io.joshuasalcedo.fx.ui.core.button.ButtonSize;
 import io.joshuasalcedo.fx.ui.core.button.ButtonVariant;
+import io.joshuasalcedo.fx.ui.core.internal.StyleClasses;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.Node;
 import javafx.scene.control.ToggleButton;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
-/// A toggle button with the same variants and sizes as ButtonMfx. When selected it shows as `:selected`.
+/// A toggle button with the same variants and sizes as ButtonMfx (shadcn's Toggle). When selected it shows as
+/// `:selected`: the accent background.
+///
+/// ```java
+/// var bold = new ToggleButtonMfx("Bold");
+/// bold.selectedProperty().subscribe(on -> editor.setBold(on));
+/// ```
+@NullMarked
 public class ToggleButtonMfx extends ToggleButton {
 
     public static final String STYLE_CLASS = "mfx-toggle-button";
@@ -20,9 +31,27 @@ public class ToggleButtonMfx extends ToggleButton {
     }
 
     public ToggleButtonMfx(String text) {
-        super(text);
-        getStyleClass().add(STYLE_CLASS);
-        // TODO: swap the variant and size style classes when they change
+        this(text, null);
+    }
+
+    public ToggleButtonMfx(String text, @Nullable Node graphic) {
+        super(text, graphic);
+        getStyleClass().remove("toggle-button");
+        getStyleClass().addAll("mfx-button", STYLE_CLASS);
+        StyleClasses.bind(this, variant, ButtonVariant::styleClass);
+        StyleClasses.bind(this, size, ButtonSize::styleClass);
+    }
+
+    /// Sets the variant and returns this button.
+    public ToggleButtonMfx variant(ButtonVariant value) {
+        setVariant(value);
+        return this;
+    }
+
+    /// Sets the size and returns this button.
+    public ToggleButtonMfx size(ButtonSize value) {
+        setSize(value);
+        return this;
     }
 
     public final ObjectProperty<ButtonVariant> variantProperty() { return variant; }

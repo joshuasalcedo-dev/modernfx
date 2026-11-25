@@ -28,4 +28,15 @@ public class PaginationMfx extends Pagination {
         setMaxPageIndicatorCount(5);
         setPageFactory(page::apply);
     }
+
+    /// NUMBERED shows up to five page numbers; SIMPLE only the current one between previous and next.
+    /// LOAD_MORE isn't for pages: it's ListMfx's "Load more" button.
+    public PaginationMfx style(PaginationStyle style) {
+        switch (style) {
+            case NUMBERED -> setMaxPageIndicatorCount(5);
+            case SIMPLE -> setMaxPageIndicatorCount(1);
+            case LOAD_MORE -> throw new IllegalArgumentException("LOAD_MORE is ListMfx's; PaginationMfx is NUMBERED or SIMPLE");
+        }
+        return this;
+    }
 }

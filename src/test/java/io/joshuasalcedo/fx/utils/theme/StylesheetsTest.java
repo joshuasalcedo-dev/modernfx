@@ -93,7 +93,9 @@ class StylesheetsTest {
                 javafx.scene.control.skin.ProgressBarSkin.getClassCssMetaData(),
                 javafx.scene.control.skin.PaginationSkin.getClassCssMetaData(),
                 javafx.scene.control.Pagination.getClassCssMetaData(),
-                javafx.scene.control.skin.CellSkinBase.getClassCssMetaData());
+                javafx.scene.control.skin.CellSkinBase.getClassCssMetaData(),
+                javafx.scene.control.skin.TreeCellSkin.getClassCssMetaData(),
+                javafx.scene.control.skin.TreeTableRowSkin.getClassCssMetaData());
         for (var list : lists) {
             for (var meta : list) {
                 names.add(meta.getProperty());

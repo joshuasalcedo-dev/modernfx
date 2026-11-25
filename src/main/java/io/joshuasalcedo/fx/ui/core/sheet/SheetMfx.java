@@ -1,9 +1,15 @@
 package io.joshuasalcedo.fx.ui.core.sheet;
 
+import io.joshuasalcedo.fx.ui.core.toast.ToastMfx;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.spreadsheet.Grid;
 import org.controlsfx.control.spreadsheet.GridBase;
 import org.controlsfx.control.spreadsheet.SpreadsheetCell;
@@ -14,7 +20,9 @@ import org.jspecify.annotations.Nullable;
 
 /// A spreadsheet: ControlsFX's [SpreadsheetView] with the shadcn look (style class `mfx-sheet`, in
 /// `components/sheet.css`): muted headers, thin grid lines, `-primary-10` selection and a ring on the active cell.
-/// Everything SpreadsheetView does works as is: editing, copy and paste, fixed rows and columns, spans, filters.
+/// Everything SpreadsheetView does works as is: editing, fixed rows and columns, spans, filters. On top of it:
+/// the cells as CellValues ([#model]), copy and paste as tab-separated text (Excel, Google Sheets), undo and redo
+/// (Ctrl+Z, Ctrl+Y), checks on edits ([#setValidation]), and the selection as CellAddresses ([#selection]).
 ///
 /// On the module path (a modular app, or running from an IDE as a module), SpreadsheetView needs two JavaFX
 /// internals opened to ControlsFX. Add these JVM options (the classpath needs nothing):
@@ -50,10 +58,112 @@ public class SheetMfx extends SpreadsheetView {
     public static final String JVM_OPTIONS = "--add-exports=javafx.base/com.sun.javafx.event=org.controlsfx.controls "
             + "--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=org.controlsfx.controls";
 
+    private @Nullable GridSheetModel model;
+    private @Nullable SheetUndoStack undo;
+    private @Nullable SheetSelectionModel selection;
+    private @Nullable SheetValidation validation;
+    private boolean reverting;
+
     /// A sheet showing this grid.
     public SheetMfx(Grid grid) {
         super(checked(grid));
         getStyleClass().add(STYLE_CLASS);
+        model();
+        addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            if (UNDO.match(e)) {
+                undoStack().undo();
+                e.consume();
+            } else if (REDO.match(e) || REDO_SHIFT.match(e)) {
+                undoStack().redo();
+                e.consume();
+            }
+        });
+    }
+
+    private static final KeyCombination UNDO = new KeyCodeCombination(KeyCode.Z, KeyCombination.SHORTCUT_DOWN);
+    private static final KeyCombination REDO = new KeyCodeCombination(KeyCode.Y, KeyCombination.SHORTCUT_DOWN);
+    private static final KeyCombination REDO_SHIFT =
+            new KeyCodeCombination(KeyCode.Z, KeyCombination.SHORTCUT_DOWN, KeyCombination.SHIFT_DOWN);
+
+    /// The cells as CellValues. A new grid (setGrid) gets a new model, and a new undo stack.
+    public SheetModel model() {
+        Grid grid = getGrid();
+        GridSheetModel m = model;
+        if (m == null || m.grid() != grid) {
+            m = new GridSheetModel(grid);
+            model = m;
+            SheetUndoStack stack = new SheetUndoStack(m, false);
+            undo = stack;
+            GridSheetModel current = m;
+            m.addListener(change -> changed(current, stack, change));
+        }
+        return m;
+    }
+
+    /// Undo and redo (Ctrl+Z, Ctrl+Y).
+    public SheetUndoStack undoStack() {
+        model();
+        return java.util.Objects.requireNonNull(undo);
+    }
+
+    /// The selection, as cell addresses.
+    public SheetSelectionModel selection() {
+        if (selection == null) {
+            selection = new SheetSelectionModel(this);
+        }
+        return selection;
+    }
+
+    /// Checks each edit; a refused one is put back and its message shown. Null accepts everything.
+    public void setValidation(@Nullable SheetValidation value) {
+        validation = value;
+    }
+
+    public @Nullable SheetValidation getValidation() {
+        return validation;
+    }
+
+    private void changed(SheetModel m, SheetUndoStack stack, SheetModel.Change change) {
+        if (reverting) {
+            return;
+        }
+        SheetValidation check = validation;
+        String error = check == null ? null : check.validate(change.address(), change.after());
+        if (error != null) {
+            reverting = true;
+            try {
+                m.set(change.address(), change.before());
+            } finally {
+                reverting = false;
+            }
+            ToastMfx.show(this, "Not accepted", error);
+            return;
+        }
+        stack.record(change);
+    }
+
+    /// Copies the selected cells as tab-separated text, for Excel and Google Sheets.
+    @Override
+    public void copyClipboard() {
+        CellRange range = selection().selectedRange();
+        if (range != null) {
+            SheetClipboard.copy(model(), range);
+        }
+    }
+
+    /// Pastes tab-separated text from the active cell down and right, as one undo step.
+    @Override
+    public void pasteClipboard() {
+        CellAddress at = selection().activeCell();
+        if (at == null) {
+            return;
+        }
+        if (!Clipboard.getSystemClipboard().hasString()) {
+            super.pasteClipboard();
+            return;
+        }
+        SheetModel m = model();
+        undoStack().compound(() -> SheetClipboard.paste(m, at));
     }
 
     /// Fails with the JVM options to add when ControlsFX can't reach the JavaFX internals it needs.

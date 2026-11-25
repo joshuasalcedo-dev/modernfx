@@ -290,6 +290,25 @@ public class ModernFXShowcase extends Application {
         p.add(new Page(core, "ui.core.togglegroup", "Buttons joined in a row that stay pressed.", ModernFXShowcase::toggleGroup));
         p.add(new Page(core, "ui.core.tooltip", "A small label that shows while the pointer rests on a node.",
                 ModernFXShowcase::tooltips));
+        p.add(new Page(core, "ui.core.board", "A Kanban board: columns of cards you drag between.", CollectionDemos::board));
+        p.add(new Page(core, "ui.core.buttongroup", "Buttons joined into one bar.", CollectionDemos::buttonGroup));
+        p.add(new Page(core, "ui.core.data", "Where collections get their items, a page at a time, and what is selected.",
+                CollectionDemos::data));
+        p.add(new Page(core, "ui.core.dnd", "Drag rows to reorder them.", CollectionDemos::dnd));
+        p.add(new Page(core, "ui.core.fab", "The floating action button: the screen's main action.", CollectionDemos::fab));
+        p.add(new Page(core, "ui.core.gridview", "A grid of tiles, such as a gallery.", CollectionDemos::gridView));
+        p.add(new Page(core, "ui.core.iconbutton", "A button with only an icon, and a tooltip.", CollectionDemos::iconButtons));
+        p.add(new Page(core, "ui.core.link", "A text link.", CollectionDemos::links));
+        p.add(new Page(core, "ui.core.list", "A list with rows, sections, paging, selection and search.", CollectionDemos::list));
+        p.add(new Page(core, "ui.core.placeholder", "What shows while loading, when empty, or on an error.",
+                CollectionDemos::placeholder));
+        p.add(new Page(core, "ui.core.segmented", "A row of options where one is selected.", CollectionDemos::segmented));
+        p.add(new Page(core, "ui.core.splitbutton", "A main action with a menu of others.", CollectionDemos::splitButtons));
+        p.add(new Page(core, "ui.core.togglebutton", "shadcn's Toggle: a button that stays pressed.", CollectionDemos::toggleButtons));
+        p.add(new Page(core, "ui.core.toolbar", "The bar above a collection: search, filters, view, bulk actions.",
+                CollectionDemos::toolbar));
+        p.add(new Page(core, "ui.core.tree", "A tree with lazy children and indent guides.", CollectionDemos::tree));
+        p.add(new Page(core, "ui.core.treetable", "Rows that open, in columns.", CollectionDemos::treeTable));
         p.add(new Page("utils", "utils.state", "App state in one place (Store), kept in a JSON file (PersistentStore).",
                 ModernFXShowcase::state));
         p.add(new Page("utils", "utils.tailwind", "Tailwind classes on JavaFX nodes (Tw), and the palette (TwColor).",
@@ -861,7 +880,7 @@ public class ModernFXShowcase extends Application {
                 .column("Method", Invoice::method)
                 .column("Amount", Invoice::amount);
         Tw.set(t, "h-[250px] w-[560px]");
-        return column(section("A list of your recent invoices", t));
+        return column(section("A list of your recent invoices", t), CollectionDemos.table());
     }
 
     // ------------------------------------------------------------------ utils pages

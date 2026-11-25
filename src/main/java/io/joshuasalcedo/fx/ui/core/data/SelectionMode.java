@@ -1,8 +1,8 @@
 package io.joshuasalcedo.fx.ui.core.data;
 
-/**
- * NONE, SINGLE, MULTIPLE.
- */
+/// How many items a collection lets the user select.
 public enum SelectionMode {
-    // TODO: constants
+    NONE,
+    SINGLE,
+    MULTIPLE
 }

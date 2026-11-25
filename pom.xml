@@ -185,6 +185,12 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- the documentation site: mvn pretty-docs:generate (target/pretty-docs), mvn pretty-docs:serve -->
+            <plugin>
+                <groupId>io.joshuasalcedo.pretty</groupId>
+                <artifactId>pretty-docs-maven-plugin</artifactId>
+                <version>1.3.0</version>
+            </plugin>
         </plugins>
     </build>
 

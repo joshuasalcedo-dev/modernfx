@@ -63,6 +63,7 @@ module io.joshuasalcedo.fx {
     exports io.joshuasalcedo.fx.ui.core.input;
     exports io.joshuasalcedo.fx.ui.core.kbd;
     exports io.joshuasalcedo.fx.ui.core.label;
+    exports io.joshuasalcedo.fx.ui.core.mdi;
     exports io.joshuasalcedo.fx.ui.core.link;
     exports io.joshuasalcedo.fx.ui.core.list;
     exports io.joshuasalcedo.fx.ui.core.menu;

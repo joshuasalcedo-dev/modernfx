@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- A sample app that uses ModernFX as any app would: a dependency on the jar, nothing shared with its build. -->
+    <groupId>io.joshuasalcedo</groupId>
+    <artifactId>modernfx-sample</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>ModernFX Sample</name>
+
+    <properties>
+        <maven.compiler.release>25</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <modernfx.version>0.1.0-SNAPSHOT</modernfx.version>
+        <main.class>io.joshuasalcedo.fx.sample/io.joshuasalcedo.fx.sample.SampleApp</main.class>
+    </properties>
+
+    <dependencies>
+        <!-- Brings JavaFX, AtlantaFX, ControlsFX and Ikonli with it. -->
+        <dependency>
+            <groupId>io.joshuasalcedo</groupId>
+            <artifactId>modernfx</artifactId>
+            <version>${modernfx.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.16.0</version>
+            </plugin>
+            <!-- mvn javafx:run -->
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>${main.class}</mainClass>
+                    <options>
+                        <!-- SheetMfx (ControlsFX's SpreadsheetView) needs these on the module path -->
+                        <option>--add-exports=javafx.base/com.sun.javafx.event=org.controlsfx.controls</option>
+                        <option>--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=org.controlsfx.controls</option>
+                        <option>--enable-native-access=javafx.graphics</option>
+                    </options>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
