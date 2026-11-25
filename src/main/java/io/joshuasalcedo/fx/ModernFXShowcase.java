@@ -28,6 +28,8 @@ import io.joshuasalcedo.fx.ui.core.input.InputMfx;
 import io.joshuasalcedo.fx.ui.core.kbd.KbdGroupMfx;
 import io.joshuasalcedo.fx.ui.core.kbd.KbdMfx;
 import io.joshuasalcedo.fx.ui.core.label.LabelMfx;
+import io.joshuasalcedo.fx.ui.core.mdi.DesktopPane;
+import io.joshuasalcedo.fx.ui.core.mdi.InternalWindow;
 import io.joshuasalcedo.fx.ui.core.menu.ContextMenuMfx;
 import io.joshuasalcedo.fx.ui.core.menu.DropdownMenuMfx;
 import io.joshuasalcedo.fx.ui.core.menu.MenuItemsMfx;
@@ -268,6 +270,8 @@ public class ModernFXShowcase extends Application {
         p.add(new Page(core, "ui.core.input", "A field for one line of text.", ModernFXShowcase::inputs));
         p.add(new Page(core, "ui.core.kbd", "A key or a keyboard shortcut.", ModernFXShowcase::kbds));
         p.add(new Page(core, "ui.core.label", "The name of a field.", ModernFXShowcase::labels));
+        p.add(new Page(core, "ui.core.mdi", "Windows inside a window: drag, resize, minimize to the task bar, maximize, close.",
+                ModernFXShowcase::mdi));
         p.add(new Page(core, "ui.core.menu", "DropdownMenu, ContextMenu and Menubar.", ModernFXShowcase::menus));
         p.add(new Page(core, "ui.core.modal", "The layer dialogs, drawers and toasts show in.", ModernFXShowcase::modal));
         p.add(new Page(core, "ui.core.pagination", "Previous, next and the page numbers.", ModernFXShowcase::pagination));
@@ -538,6 +542,42 @@ public class ModernFXShowcase extends Application {
 
     private static SeparatorMfx vertical() {
         return new SeparatorMfx().orientation(SeparatorMfx.Orientation.VERTICAL);
+    }
+
+    private static Node mdi() {
+        DesktopPane desktop = new DesktopPane();
+        Tw.set(desktop, "bg-muted rounded-xl border overflow-hidden");
+        desktop.setPrefSize(860, 460);
+        desktop.setMinHeight(460);
+        int[] count = {0};
+        Runnable open = () -> {
+            int n = ++count[0];
+            VBox body = new VBox(text("Window " + n, "text-lg font-semibold text-foreground"),
+                    text("Drag the title bar to move it, an edge to resize it. Minimized windows go to the task bar.",
+                            "text-sm text-muted-foreground"),
+                    new InputMfx("Type here"));
+            Tw.set(body, "p-4 gap-3");
+            body.setPrefSize(300, 160);
+            desktop.addInternalWindow(new InternalWindow("window-" + n, icon(Feather.FILE_TEXT), "Document " + n, body),
+                    new javafx.geometry.Point2D(24 + (n - 1) % 8 * 32, 24 + (n - 1) % 8 * 28));
+        };
+        open.run();
+        open.run();
+        ButtonMfx add = new ButtonMfx("New window");
+        add.setOnAction(e -> open.run());
+        ButtonMfx tile = new ButtonMfx("Tile").variant(ButtonMfx.Variant.OUTLINE);
+        tile.setOnAction(e -> desktop.tileVisibleWindows());
+        ButtonMfx minimize = new ButtonMfx("Minimize all").variant(ButtonMfx.Variant.OUTLINE);
+        minimize.setOnAction(e -> desktop.minimizeAllWindows());
+        ButtonMfx restore = new ButtonMfx("Restore").variant(ButtonMfx.Variant.OUTLINE);
+        restore.setOnAction(e -> desktop.restoreMinimizedWindows());
+        ButtonMfx close = new ButtonMfx("Close all").variant(ButtonMfx.Variant.GHOST);
+        close.setOnAction(e -> desktop.closeAllWindows());
+        HBox actions = new HBox(add, tile, minimize, restore, close);
+        Tw.set(actions, "gap-2 items-center");
+        VBox box = new VBox(actions, desktop);
+        Tw.set(box, "gap-3");
+        return column(section("DesktopPane with InternalWindows", box));
     }
 
     private static Node cards() {

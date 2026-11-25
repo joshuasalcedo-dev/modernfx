@@ -23,6 +23,20 @@ Java 25, JavaFX 27. Work in progress: many components are still stubs.
 
 Build it yourself with `mvn install` until a release is published.
 
+Or get it from GitHub Packages: every push to `main` publishes the `-SNAPSHOT` there. GitHub asks for a login even for
+public packages, so add the repository, and a server `github` in `~/.m2/settings.xml` with your GitHub user and a token
+that has `read:packages`:
+
+```xml
+<repositories>
+    <repository>
+        <id>github</id>
+        <url>https://maven.pkg.github.com/joshuasalcedo-dev/modernfx</url>
+        <snapshots><enabled>true</enabled></snapshots>
+    </repository>
+</repositories>
+```
+
 ## Theme
 
 ```java

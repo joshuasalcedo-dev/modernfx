@@ -207,6 +207,22 @@
     </distributionManagement>
 
     <profiles>
+        <!-- mvn deploy -Pgithub publishes to GitHub Packages (https://github.com/joshuasalcedo-dev/modernfx/packages).
+             The credentials are server id "github" in ~/.m2/settings.xml: a GitHub user and a token with
+             write:packages (in CI, the workflow's GITHUB_TOKEN; see .github/workflows/github-packages.yml). -->
+        <profile>
+            <id>github</id>
+            <distributionManagement>
+                <repository>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/joshuasalcedo-dev/modernfx</url>
+                </repository>
+                <snapshotRepository>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/joshuasalcedo-dev/modernfx</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
         <!-- mvn deploy -Pcentral publishes to Maven Central through the Central Portal: sources, Javadoc and GPG
              signatures, as Central asks. The token is server id "central" in ~/.m2/settings.xml; the GPG key is
              the one in the local keyring (or in CI, the key setup-java imports).

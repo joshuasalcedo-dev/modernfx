@@ -1,0 +1,79 @@
+# Publishes io.joshuasalcedo:modernfx to GitHub Packages (https://github.com/joshuasalcedo-dev/modernfx/packages):
+# the pom's version (a -SNAPSHOT) on every push to main, and X.Y.Z when a tag vX.Y.Z is pushed (or by hand).
+# Uses the workflow's GITHUB_TOKEN, so it needs no secrets of its own.
+name: GitHub Packages
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish, e.g. 0.1.0 (empty: the pom version)'
+        required: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
+
+      - name: Version
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          if [ -z "$VERSION" ] && [ "${GITHUB_REF_TYPE}" = "tag" ]; then VERSION="${GITHUB_REF_NAME#v}"; fi
+          if [ -n "$VERSION" ]; then mvn -B -q versions:set -DnewVersion="$VERSION" -DgenerateBackupPoms=false; fi
+          echo "Publishing $(mvn -B -q help:evaluate -Dexpression=project.version -DforceStdout)"
+
+      # The theme test opens a window, so the tests run on a virtual display.
+      - name: Test and publish to GitHub Packages
+        run: xvfb-run --auto-servernum mvn -B -Pgithub deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Discord #deployments, as swaswa-systems/root's notify-discord.yml does it (this public repository can't call
+  # that private one). Needs the repository secret DISCORD_WEBHOOK_DEPLOYMENTS; skipped without it.
+  notify:
+    needs: [publish]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post to Discord
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_DEPLOYMENTS }}
+          RESULT: ${{ contains(needs.*.result, 'failure') && 'failure' || (contains(needs.*.result, 'cancelled') && 'cancelled' || 'success') }}
+          REF: ${{ github.event.inputs.version || github.ref_name }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+          ACTOR: ${{ github.actor }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ -z "$WEBHOOK" ]; then echo "DISCORD_WEBHOOK_DEPLOYMENTS is not set: skipping"; exit 0; fi
+          case "$RESULT" in
+            success)   icon="🟢"; color=3066993;  word="published to GitHub Packages" ;;
+            cancelled) icon="⚪"; color=9807270;  word="publish was cancelled" ;;
+            *)         icon="🔴"; color=15158332; word="publish FAILED" ;;
+          esac
+          export ICON="$icon" COLOR="$color" WORD="$word"
+          python3 - <<'PY' > payload.json
+          import json, os
+          e = os.environ
+          desc = (f"**{e['REPO']}** @ `{e['SHA'][:7]}` by {e['ACTOR']}\n"
+                  f"https://github.com/{e['REPO']}/packages")
+          print(json.dumps({"embeds": [{"title": f"{e['ICON']} modernfx ({e['REF']}) {e['WORD']}",
+                                        "url": e["RUN_URL"], "color": int(e["COLOR"]), "description": desc}]}))
+          PY
+          curl -fsS -H "Content-Type: application/json" --data @payload.json "$WEBHOOK" >/dev/null && echo "posted to Discord"
